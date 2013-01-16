@@ -1,11 +1,5 @@
 production:
-  sessions:
-    default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
-      options:
-        skip_version_check: true
-        safe: true
-        raise_not_found_error: false
+  uri: <%= ENV['MONGOLAB_URI'] %>
 development:
   # Configure available database sessions. (required)
   sessions:
