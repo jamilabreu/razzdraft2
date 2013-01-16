@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  year: 1
+  owner: MyString
+  rank: 1
+  runs: 1
+  homeruns: 1
+  rbi: 1
+  average: 1.5
+  steals: 1
+  wins: 1
+  losses: 1
+  era: 1.5
+  whip: 1.5
+  strikeouts: 1
+  saves: 1
+  blurb: MyString
+
+two:
+  year: 1
+  owner: MyString
+  rank: 1
+  runs: 1
+  homeruns: 1
+  rbi: 1
+  average: 1.5
+  steals: 1
+  wins: 1
+  losses: 1
+  era: 1.5
+  whip: 1.5
+  strikeouts: 1
+  saves: 1
+  blurb: MyString

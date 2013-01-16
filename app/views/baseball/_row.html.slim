@@ -1,0 +1,32 @@
+tr id="#{projection.id}"
+	td.actions-draft
+		- if projection.baseball_player.positions.length > 1
+			div href="#" class="small button dropdown draft"
+				| Draft
+				ul
+					- projection.baseball_player.positions.each do |position|
+						li= link_to position, "#"
+		- else
+			= link_to "#", class:"small button draft" do
+				|	Draft
+				i class="general foundicon-plus"
+	td.player_name
+		= link_to show_blurb_path(projection), remote: true do
+			i class="general foundicon-add-doc"
+			= projection.baseball_player.name
+	td.player_rank= projection.rank
+	td.player_position= projection.baseball_player.positions.join(",")
+	td.projection class="#{impact(projection.runs,90,80,70)}"= projection.runs
+	td.projection class="#{impact(projection.homeruns,26,19,12)}"= projection.homeruns
+	td.projection class="#{impact(projection.rbi,90,80,70)}"= projection.rbi
+	td.projection class="#{impact(projection.average,0.300,0.285,0.270)}"= projection.average_f
+	td.projection class="#{impact(projection.steals,30,20,10)}"= projection.steals
+	td.projection class="#{impact(projection.wins,18,14,10)}"= projection.wins
+	td.projection class="#{impact_inverse(projection.losses,4,8,12)}"= projection.losses
+	td.projection class="#{impact(projection.strikeouts,200,180,160)}"= projection.strikeouts
+	td.projection class="#{impact_inverse(projection.era,3.00,3.25,3.50)}"= projection.era_f
+	td.projection class="#{impact_inverse(projection.whip,1.10,1.20,1.30)}"= projection.whip_f
+	td.projection class="#{impact(projection.saves,30,20,10)}"= projection.saves
+	td.actions-taken
+		= link_to root_path, class: "" do
+			i class="general foundicon-remove"

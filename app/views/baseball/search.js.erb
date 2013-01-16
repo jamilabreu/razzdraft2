@@ -1,0 +1,8 @@
+<% if @projections.length > 0 %>
+$('#available_players').html('<%= j render partial: "table", locals: { collection: @projections } %>');
+	<% if @projections.length < 5 %>
+		$('.player_name:first a').click();
+	<% end %>
+<% else %>
+	$('#player_search').css({background: "#ff0"});
+<% end %>

@@ -1,0 +1,67 @@
+# encoding: utf-8
+class BaseballProjection
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Paranoia
+  # include AutoHtmlFor
+  # auto_html_for :blurb do
+  #   # image
+  #   # youtube(:width => 400, :height => 250)
+  #   # link :target => "_blank"
+  #   # simple_format
+  #   # html_escape
+  # end
+
+  embeds_one :baseball_player
+  after_validation :fix_blurb
+
+  field :year, type: Integer
+  field :owner, type: String
+  field :rank, type: Integer
+  field :runs, type: Integer, default: ->{ 0 }
+  field :homeruns, type: Integer, default: ->{ 0 }
+  field :rbi, type: Integer, default: ->{ 0 }
+  field :average, type: Float, default: ->{ 0.000 }
+  field :steals, type: Integer, default: ->{ 0 }
+  field :wins, type: Integer, default: ->{ 0 }
+  field :losses, type: Integer, default: ->{ 0 }
+  field :era, type: Float, default: ->{ 0.00 }
+  field :whip, type: Float, default: ->{ 0.00 }
+  field :strikeouts, type: Integer, default: ->{ 0 }
+  field :saves, type: Integer, default: ->{ 0 }
+  field :blurb, type: String
+
+  rails_admin do
+    list do
+      sort_by :rank
+      field :baseball_player
+      field :rank
+      field :runs
+      field :homeruns
+      field :rbi
+      field :average
+      field :steals
+      field :wins
+      field :losses
+      field :strikeouts
+      field :era
+      field :whip
+      field :saves
+      field :owner
+      field :year
+    end
+  end
+
+  def fix_blurb
+    self.blurb = blurb.gsub(/<a href/, "<a target='_blank' href").gsub(/ñ/," ").gsub(/æ/, " ").gsub(/Í/,"'").gsub(/î/, " ") if self.blurb
+  end
+  def average_f
+    ("%0.3f" % average).sub!(/^0/, "")
+  end
+  def era_f
+    "%0.2f" % era
+  end
+  def whip_f
+    "%0.2f" % whip
+  end
+end

@@ -1,0 +1,144 @@
+$BLACK: #2B2B2B
+$BLUE: #345F94 //#006688
+
+i
+	position: relative
+	top: 1px
+
+body
+	-webkit-font-smoothing: antialiased
+
+.top-bar
+	background: #222
+
+.top-bar ul > li.search
+	padding-left: 0
+
+.top-bar ul > li:not(.name):hover
+	background: #282828
+
+.top-bar ul > li:not(.name).active, .top-bar ul > li:not(.name):focus
+	background: #333
+	a
+		color: #FFF
+
+.panel
+	margin: 20px 0
+	padding: 18px 20px
+	@include border-radius(3px)
+	h4
+		margin-bottom: 10px
+
+table
+	border: 0
+	border-bottom: 1px solid #EEE
+	border-spacing: 0
+	@include border-radius(0)
+
+table thead tr th
+	padding: 0
+	font-size: 12px
+	text-align: center
+	vertical-align: middle
+
+table tbody tr td
+	border-top: 1px solid #EAEAEA
+	font-size: 12px
+	font-weight: 700
+	padding: 2px 0
+	text-align: center
+	vertical-align: middle
+
+table tbody tr td.player_name
+	text-align: left
+	width: 17%
+	min-width: 155px
+	a
+		color: #333
+		display: block
+		i
+			color: #999
+			padding: 0 10px
+		&:hover
+			color: $BLUE
+			i
+				color: $BLUE
+
+
+table tbody tr td.blurb
+	@include background(linear-gradient(#FFF06B, #FFFDEB 2%, #FFFDEB 98%, #FFF06B))
+	color: #333
+	font-size: 13px
+	font-weight: 500
+	padding: 15px 20px
+	text-align: left
+	i
+		color: #FF801F
+		padding-right: 10px
+
+table tbody tr td.player_rank
+	font-weight: 500
+	width: 3%
+	min-width: 20px
+
+table tbody tr td.player_position
+	font-weight: 500
+	width: 7%
+	min-width: 60px
+
+table tbody tr td.projection
+	width: 5%
+	min-width: 30px
+
+table tbody tr td.zero
+	color: transparent
+
+table tbody tr td.best
+	background: #F74700
+	color: #FFF
+
+table tbody tr td.good
+	background: #EC8713
+	color: #FFF
+
+table tbody tr td.average
+	background: #e5c86f
+	color: #d46437
+
+table tbody tr td.poor
+	background: #CCCCCC
+	color: #666
+
+table tbody tr td.actions-draft
+	text-align: left
+	width: 7%
+	min-width: 75px
+	a, div
+		margin-left: 5px
+		i
+			padding-left: 3px
+
+table tbody tr td.actions-taken
+	width: 1%
+	min-width: 35px
+	a
+		color: #AAA
+		display: block
+		&:hover
+			color: #555
+
+.button.small
+	padding: 4px 14px 5px
+
+footer
+	background: #000
+	height: 45px
+	position: fixed
+	bottom: 0
+	left: 0
+	width: 100%
+
+@media only screen and (max-width: 767px)
+	// Small Device Styles here
+	.button.small
+		display: inline-block

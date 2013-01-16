@@ -1,0 +1,22 @@
+table.twelve id="example"
+  thead
+    tr
+      th
+      th
+      th #
+      th POS
+      th R
+      th HR
+      th RBI
+      th AVG
+      th SB
+      th W
+      th L
+      th K
+      th ERA
+      th WHIP
+      th SV
+      th
+      th
+  tbody
+  	= render partial: "row", collection: collection, as: :projection

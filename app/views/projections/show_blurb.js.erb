@@ -1,0 +1,6 @@
+if ($('#<%= @projection.id %>-blurb').length) {
+	$('#<%= @projection.id %>-blurb').remove();
+} else {
+	$('#<%= @projection.id %>').after('<%= j render partial: "blurb", object: @projection, as: :projection %>');
+	$('#<%= @projection.id %>-blurb').hide().fadeIn('fast');
+}
