@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+ruby '1.9.3'
 
 gem 'rails', '3.2.11'
 gem 'mongoid'
@@ -9,6 +9,9 @@ gem 'figaro'
 
 group :development do
   gem 'quiet_assets'
+  gem 'rack-livereload'
+  gem 'guard-livereload'
+  gem 'rb-fsevent', '~> 0.9.1'
 end
 
 group :assets do

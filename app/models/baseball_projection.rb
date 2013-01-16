@@ -3,16 +3,10 @@ class BaseballProjection
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Paranoia
-  # include AutoHtmlFor
-  # auto_html_for :blurb do
-  #   # image
-  #   # youtube(:width => 400, :height => 250)
-  #   # link :target => "_blank"
-  #   # simple_format
-  #   # html_escape
-  # end
 
   embeds_one :baseball_player
+  accepts_nested_attributes_for :baseball_player
+
   after_validation :fix_blurb
 
   field :year, type: Integer
