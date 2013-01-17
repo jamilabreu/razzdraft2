@@ -6,10 +6,9 @@
 / 		.panel
 / 			h4 Welcome to RazzDraft!
 / 			p Keep tabs on your team stats, Razzball projections, and player blurbs.
-
 - if current_user.try(:baseball_team)
 	#drafted_payers
-		= render partial: "#{@sport}/table_drafted"
+		= render partial: "baseball/table_drafted"
 
 #available_players
-	= render partial: "#{@sport}/table", locals: { collection: @available }
+	= render partial: "baseball/table", locals: { collection: @available }

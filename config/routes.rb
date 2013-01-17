@@ -1,6 +1,4 @@
 Razzdraft::Application.routes.draw do
-  get "football/index"
-
   devise_for :admin_users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   devise_for :users

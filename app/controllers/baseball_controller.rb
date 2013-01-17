@@ -1,5 +1,5 @@
 class BaseballController < ApplicationController
-  before_filter :load_sport
+
   def search
   	if params[:query]
   		@projections = BaseballProjection.where(name: /#{params[:query]}/i).asc(:rank)

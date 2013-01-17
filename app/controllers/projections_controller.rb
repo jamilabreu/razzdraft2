@@ -1,5 +1,4 @@
 class ProjectionsController < ApplicationController
-	before_filter :load_sport
 
 	def index
 		if @sport == "football"
