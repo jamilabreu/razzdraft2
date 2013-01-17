@@ -8,9 +8,8 @@ Razzdraft::Application.routes.draw do
   match 'show_blurb/:id' => 'projections#show_blurb', as: 'show_blurb'
   match 'baseball/search' => 'baseball#search', as: 'baseball_search'
   match 'baseball/draft_player/:id' => 'baseball#draft_player', as: 'draft_player'
+  match '', to: 'projections#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   root to: "projections#index"
-
-  # match '', to: 'projections#index', constraints: {subdomain: /.+/}
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
