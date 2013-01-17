@@ -1,21 +1,21 @@
 tr id="#{projection.id}"
 	td.actions-draft
-		- if projection.baseball_player.positions.length > 1
+		- if projection.positions.length > 1
 			div href="#" class="small button dropdown draft"
 				| Draft
 				ul
-					- projection.baseball_player.positions.each do |position|
-						li= link_to position, "#"
+					- projection.positions.each do |position|
+						li= link_to position, user_signed_in? ? draft_player_path(projection, position: position.strip) : new_user_registration_path
 		- else
-			= link_to "#", class:"small button draft" do
+			= link_to user_signed_in? ? draft_player_path(projection, position: projection.position) : new_user_registration_path, class:"small button draft" do
 				|	Draft
 				i class="general foundicon-plus"
 	td.player_name
 		= link_to show_blurb_path(projection), remote: true do
 			i class="general foundicon-add-doc"
-			= projection.baseball_player.name
+			= projection.name
 	td.player_rank= projection.rank
-	td.player_position= projection.baseball_player.positions.join(",")
+	td.player_positions= projection.positions.join(", ")
 	td.projection class="#{impact(projection.runs,90,80,70)}"= projection.runs
 	td.projection class="#{impact(projection.homeruns,26,19,12)}"= projection.homeruns
 	td.projection class="#{impact(projection.rbi,90,80,70)}"= projection.rbi
@@ -30,3 +30,5 @@ tr id="#{projection.id}"
 	td.actions-taken
 		= link_to root_path, class: "" do
 			i class="general foundicon-remove"
+
+/root_path(projection.positions.first.to_sym => params[projection.positions.first.to_sym] ? params[projection.positions.first.to_sym] + [projection] : [projection])

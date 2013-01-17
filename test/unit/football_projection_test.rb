@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PlayerTest < ActiveSupport::TestCase
+class FootballProjectionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

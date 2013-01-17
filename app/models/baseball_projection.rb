@@ -4,13 +4,15 @@ class BaseballProjection
   include Mongoid::Timestamps
   include Mongoid::Paranoia
 
-  embeds_one :baseball_player
-  accepts_nested_attributes_for :baseball_player
-
+  belongs_to :baseball_team
   after_validation :fix_blurb
 
-  field :year, type: Integer
-  field :owner, type: String
+  field :name, type: String
+  field :first_name, type: String
+  field :last_name, type: String
+  field :positions, type: Array
+  field :team, type: String
+  field :team_abbreviation, type: String
   field :rank, type: Integer
   field :runs, type: Integer, default: ->{ 0 }
   field :homeruns, type: Integer, default: ->{ 0 }
@@ -24,11 +26,16 @@ class BaseballProjection
   field :strikeouts, type: Integer, default: ->{ 0 }
   field :saves, type: Integer, default: ->{ 0 }
   field :blurb, type: String
+  field :owner, type: String
+  field :sport, type: String
+  field :year, type: Integer
 
   rails_admin do
     list do
       sort_by :rank
-      field :baseball_player
+      field :name
+      field :owner
+      field :year
       field :rank
       field :runs
       field :homeruns
@@ -41,8 +48,6 @@ class BaseballProjection
       field :era
       field :whip
       field :saves
-      field :owner
-      field :year
     end
   end
 
@@ -57,5 +62,8 @@ class BaseballProjection
   end
   def whip_f
     "%0.2f" % whip
+  end
+  def position
+    positions.first
   end
 end

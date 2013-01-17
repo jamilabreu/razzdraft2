@@ -1,3 +1,22 @@
+GIT
+  remote: git://github.com/sferik/rails_admin.git
+  revision: 0183a83d9fc5026f78c50365491ad9970726bb24
+  specs:
+    rails_admin (0.4.1)
+      bootstrap-sass (~> 2.1)
+      builder (~> 3.0)
+      coffee-rails (~> 3.1)
+      font-awesome-sass-rails (~> 3.0, >= 3.0.0.1)
+      haml (~> 3.1)
+      jquery-rails (~> 2.1)
+      jquery-ui-rails (~> 3.0)
+      kaminari (~> 0.14)
+      nested_form (~> 0.2)
+      rack-pjax (~> 0.6)
+      rails (~> 3.1)
+      remotipart (~> 1.0)
+      sass-rails (~> 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -28,11 +47,7 @@ GEM
     activesupport (3.2.11)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    addressable (2.3.2)
     arel (3.0.2)
-    auto_html (1.6.0)
-      redcarpet (~> 2.0)
-      rinku (~> 1.5.0)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
@@ -41,7 +56,6 @@ GEM
       bson (~> 1.8.1)
     builder (3.0.4)
     chunky_png (1.2.7)
-    coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -61,9 +75,6 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
-    em-websocket (0.3.8)
-      addressable (>= 2.1.1)
-      eventmachine (>= 0.12.9)
     erubis (2.7.0)
     eventmachine (1.0.0)
     execjs (1.4.0)
@@ -78,15 +89,6 @@ GEM
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
     fssm (0.2.9)
-    guard (1.6.1)
-      listen (>= 0.6.0)
-      lumberjack (>= 1.0.2)
-      pry (>= 0.9.10)
-      thor (>= 0.14.6)
-    guard-livereload (1.1.3)
-      em-websocket (>= 0.2.0)
-      guard (>= 1.5.0)
-      multi_json (~> 1.0)
     haml (3.1.7)
     hike (1.2.1)
     i18n (0.6.1)
@@ -101,13 +103,10 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    listen (0.7.1)
-    lumberjack (1.0.2)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    method_source (0.8.1)
     mime-types (1.19)
     modular-scale (1.0.6)
       compass (>= 0.12.1)
@@ -125,17 +124,11 @@ GEM
     origin (1.0.11)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
-    pry (0.9.10)
-      coderay (~> 1.0.5)
-      method_source (~> 0.8)
-      slop (~> 3.3.1)
     quiet_assets (1.0.1)
       railties (~> 3.1)
     rack (1.4.4)
     rack-cache (1.2)
       rack (>= 0.4)
-    rack-livereload (0.3.10)
-      rack
     rack-pjax (0.7.0)
       nokogiri (~> 1.5)
       rack (~> 1.3)
@@ -151,20 +144,6 @@ GEM
       activesupport (= 3.2.11)
       bundler (~> 1.0)
       railties (= 3.2.11)
-    rails_admin (0.4.1)
-      bootstrap-sass (~> 2.1)
-      builder (~> 3.0)
-      coffee-rails (~> 3.1)
-      font-awesome-sass-rails (~> 3.0, >= 3.0.0.1)
-      haml (~> 3.1)
-      jquery-rails (~> 2.1)
-      jquery-ui-rails (~> 3.0)
-      kaminari (~> 0.14)
-      nested_form (~> 0.2)
-      rack-pjax (~> 0.6)
-      rails (~> 3.1)
-      remotipart (~> 1.0)
-      sass-rails (~> 3.1)
     railties (3.2.11)
       actionpack (= 3.2.11)
       activesupport (= 3.2.11)
@@ -173,12 +152,9 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (10.0.3)
-    rb-fsevent (0.9.3)
     rdoc (3.12)
       json (~> 1.4)
-    redcarpet (2.2.2)
     remotipart (1.0.2)
-    rinku (1.5.1)
     sass (3.2.5)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -194,7 +170,6 @@ GEM
       activesupport (>= 3.0, < 4.1)
       railties (>= 3.0, < 4.1)
       slim (~> 1.3)
-    slop (3.3.3)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -226,7 +201,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  auto_html
   bson_ext
   coffee-rails (~> 3.2.1)
   compass-rails
@@ -234,14 +208,11 @@ DEPENDENCIES
   ffaker
   figaro
   foundation-icons-sass-rails
-  guard-livereload
   jquery-rails
   mongoid
   quiet_assets
-  rack-livereload
   rails (= 3.2.11)
-  rails_admin
-  rb-fsevent (~> 0.9.1)
+  rails_admin!
   sass-rails (~> 3.2.3)
   slim-rails
   thin

@@ -31,7 +31,6 @@ body
 
 table
 	border: 0
-	border-bottom: 1px solid #EEE
 	border-spacing: 0
 	@include border-radius(0)
 
@@ -41,11 +40,14 @@ table thead tr th
 	text-align: center
 	vertical-align: middle
 
+table tbody tr:last-child td
+	border-bottom: 1px solid #EAEAEA
+
 table tbody tr td
 	border-top: 1px solid #EAEAEA
 	font-size: 12px
 	font-weight: 700
-	padding: 2px 0
+	padding: 1px 0
 	text-align: center
 	vertical-align: middle
 
@@ -81,7 +83,7 @@ table tbody tr td.player_rank
 	width: 3%
 	min-width: 20px
 
-table tbody tr td.player_position
+table tbody tr td.player_positions
 	font-weight: 500
 	width: 7%
 	min-width: 60px
@@ -130,8 +132,20 @@ table tbody tr td.actions-taken
 .button.small
 	padding: 4px 14px 5px
 
+/* TEAM -----------------------------------------------------------------------------------------*/
+#drafted_payers
+	margin-top: 18px
+
+table.left_table
+	padding: 0 10px 0 20px
+	width: 100%
+
+table.right_table
+	padding: 0 20px 0 10px
+	width: 100%
+
 footer
-	background: #000
+	background: #FFF
 	height: 45px
 	position: fixed
 	bottom: 0

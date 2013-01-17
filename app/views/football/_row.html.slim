@@ -1,0 +1,27 @@
+tr id="#{projection.id}"
+	td.actions-draft
+		- if projection.positions.length > 1
+			div href="#" class="small button dropdown draft"
+				| Draft
+				ul
+					- projection.positions.each do |position|
+						li= link_to position, "#"
+		- else
+			= link_to root_path(drafted: params[:drafted] ? params[:drafted] + [projection] : [projection]), class:"small button draft" do
+				|	Draft
+				i class="general foundicon-plus"
+	td.player_name
+		= link_to show_blurb_path(projection), remote: true do
+			i class="general foundicon-add-doc"
+			= projection.name
+	td.player_rank= projection.team
+	td.player_positions= projection.positions.join(",")
+	td.projection= projection.games
+	td.projection= projection.qbr
+	td.projection= projection.comp
+	td.projection= projection.att
+	td.projection= projection.pct
+	td.projection= projection.touchdowns
+	td.actions-taken
+		= link_to root_path, class: "" do
+			i class="general foundicon-remove"

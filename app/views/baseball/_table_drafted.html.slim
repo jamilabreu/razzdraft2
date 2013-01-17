@@ -1,0 +1,70 @@
+.twelve
+	.six style="float: left"
+		table.left_table
+			thead
+				tr
+					td #
+					th POS
+					th
+					th R
+					th HR
+					th RBI
+					th AVG
+					th SB
+			tbody
+				- @hitters_hash.each do |variable, position|
+					- instance_variable_get("@#{variable}").each do |projection|
+						tr
+							td
+							td= position
+							td= projection.name
+							td= projection.runs
+							td= projection.homeruns
+							td= projection.rbi
+							td= projection.average_f
+							td= projection.steals
+				tr
+					td
+					td Total
+					td
+					td= current_user.baseball_team.runs
+					td= current_user.baseball_team.homeruns
+					td= current_user.baseball_team.rbi
+					td= current_user.baseball_team.average_f
+					td= current_user.baseball_team.steals
+	.six style="float: right"
+		table.right_table
+			thead
+				tr
+					th #
+					th POS
+					th
+					th W
+					th L
+					th K
+					th ERA
+					th WHIP
+					th SV
+			tbody
+				- @pitchers_hash.each do |variable, position|
+					- instance_variable_get("@#{variable}").each do |projection|
+						tr
+							td
+							td= position
+							td= projection.name
+							td= projection.wins
+							td= projection.losses
+							td= projection.strikeouts
+							td= projection.era_f
+							td= projection.whip_f
+							td= projection.saves
+				tr
+					td
+					td Total
+					td
+					td= current_user.baseball_team.wins
+					td= current_user.baseball_team.losses
+					td= current_user.baseball_team.strikeouts
+					td= current_user.baseball_team.era_f
+					td= current_user.baseball_team.whip_f
+					td= current_user.baseball_team.saves

@@ -13,14 +13,14 @@
 					li.toggle-topbar= link_to "", "#"
 				section
 					ul.right
-						li= link_to "Roster", "#"
-						li.active= link_to "Free Agents", "#"
-						/ li.divider.show-for-medium-and-up
-						li.has-dropdown
-							= link_to "More", "#"
-							ul.dropdown
-								li= link_to "Taken Players", "#"
-						/ 		li= link_to "Link1", root_path
-						/ 		li= link_to "Link1", root_path
-						/ 		li.divider
-						/ 		li= link_to "Link1", root_path
+						- if user_signed_in?
+							li= link_to "Roster", "#"
+							li.active= link_to "Free Agents", "#"
+							li.has-dropdown
+								= link_to "More", "#"
+								ul.dropdown
+									li= link_to "Taken Players", "#"
+									li= link_to "Logout", destroy_user_session_path, method: :delete
+						-	else
+							li= link_to "Sign Up", new_user_registration_path
+							li= link_to "Login", new_user_session_path

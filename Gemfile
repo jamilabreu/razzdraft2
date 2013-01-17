@@ -9,9 +9,6 @@ gem 'figaro'
 
 group :development do
   gem 'quiet_assets'
-  gem 'rack-livereload'
-  gem 'guard-livereload'
-  gem 'rb-fsevent', '~> 0.9.1'
 end
 
 group :assets do
@@ -27,6 +24,4 @@ gem 'jquery-rails'
 gem 'slim-rails'
 gem 'ffaker'
 gem 'devise'
-gem 'rails_admin'
-
-gem 'auto_html'
+gem 'rails_admin', git: 'git://github.com/sferik/rails_admin.git'

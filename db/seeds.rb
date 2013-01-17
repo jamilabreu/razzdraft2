@@ -9,7 +9,13 @@ positions = %w( 1B 2B SS 3B SP RP )
 
 puts "CREATE PROJECTIONS"
 CSV.foreach("#{Rails.root}/lib/data/baseball_projections_2013.csv", encoding: "ISO8859-1:utf-8", headers: true) do |row|
-	projection = BaseballProjection.create(
+	BaseballProjection.create(
+		name: "#{row[1]} #{row[2]}",
+		first_name: row[1],
+		last_name: row[2],
+		positions: row[4].nil? ? [] : row[4].split(","),
+		team: "New York Yankees",
+		team_abbreviation: "NYY",
 		rank: 			row[0],
 		runs: 			row[5].nil? ? 0 : row[5],
 		homeruns: 	row[6].nil? ? 0 : row[6],
@@ -26,16 +32,21 @@ CSV.foreach("#{Rails.root}/lib/data/baseball_projections_2013.csv", encoding: "I
 		year: 2013,
 		owner: "Grey Albright"
 	)
-	player = projection.create_baseball_player(
-		name: "#{row[1]} #{row[2]}",
-		first_name: row[1],
-		last_name: row[2],
-		positions: row[4].nil? ? [] : row[4].split(","),
-		team: "New York Yankees",
-		team_abbreviation: "NYY"
-	)
 end
 
+CSV.foreach("#{Rails.root}/lib/data/nfl_2011.csv", encoding: "ISO8859-1:utf-8", headers: true) do |row|
+	FootballProjection.create(
+		name: row[0],
+		team: row[1],
+		positions: ["QB"],
+		games: row[2],
+		qbr: row[3],
+		comp: row[4],
+		att: row[5],
+		pct: row[6],
+		touchdowns: row[10]
+	)
+end
 # puts "CREATE USERS"
 # 20.times do
 #   random_uid = rand(300000..302715)
