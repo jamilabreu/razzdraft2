@@ -10,6 +10,7 @@ body
 
 .top-bar
 	background: #222
+	margin: 0
 
 .top-bar ul > li.search
 	padding-left: 0
@@ -39,6 +40,20 @@ table thead tr th
 	font-size: 12px
 	text-align: center
 	vertical-align: middle
+	a
+		color: #333
+		display: block
+
+table thead tr th.selected
+	background: #2ba6cb url("arrow.png") no-repeat right
+	border: 1px solid #1e728c
+	a
+		color: #FFF
+
+// table thead tr th.position-selected
+// 	background: #2ba6cb
+// 	border: 1px solid #1e728c
+// 	color: #FFF
 
 table tbody tr:last-child td
 	border-bottom: 1px solid #EAEAEA
@@ -157,3 +172,6 @@ footer
 	// Small Device Styles here
 	.button.small
 		display: inline-block
+
+	table thead tr th.selected
+		background: #CCC

@@ -1,14 +1,11 @@
-/ - if @drafted
-/ 	#drafted_players
-/ 		= render partial: "table", locals: { collection: @drafted }
-/ - else
-/ 	.twelve.columns
-/ 		.panel
-/ 			h4 Welcome to RazzDraft!
-/ 			p Keep tabs on your team stats, Razzball projections, and player blurbs.
 - if current_user.try(:baseball_team)
 	#drafted_payers
 		= render partial: "baseball/table_drafted"
+- else
+	.twelve.columns
+		.panel
+			h4 Welcome to RazzDraft!
+			p Keep tabs on your team stats, Razzball projections, and player blurbs.
 
 #available_players
 	= render partial: "baseball/table", locals: { collection: @available }

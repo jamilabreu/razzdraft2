@@ -9,7 +9,7 @@
 						form.collapse
 							input id="player_search" placeholder="Player Search" type="search"
 					li
-						= select_tag :position_search, options_for_select([["ALL", nil],"C","1B","2B","SS","3B","MI","CI","OF","UTIL","P","SP","RP"])
+						= select_tag :position_search, options_for_select(["ALL","C","1B","2B","SS","3B","MI","CI","OF","UTIL","P","SP","RP"], selected: params[:position])
 					li.toggle-topbar= link_to "", "#"
 				section
 					ul.right

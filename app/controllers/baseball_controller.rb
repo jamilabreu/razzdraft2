@@ -2,12 +2,12 @@ class BaseballController < ApplicationController
 
   def search
   	if params[:query]
-  		@projections = BaseballProjection.where(name: /#{params[:query]}/i).asc(:rank)
-  	elsif params[:position]
-  		position = params[:position] == "MI" ? ["2B","SS"] : params[:position] == "CI" ? ["1B","3B"] : params[:position] == "P" ? ["SP","RP"] : params[:position] == "UTIL" ? ["C","1B","2B","3B","SS","OF"] : params[:position].to_a
-  		@projections = BaseballProjection.any_in(positions: position).asc(:rank)
+  		@projections = BaseballProjection.where(name: /#{params[:query]}/i)
+  	# elsif params[:position].present?
+  	# 	position = params[:position] == "MI" ? ["2B","SS"] : params[:position] == "CI" ? ["1B","3B"] : params[:position] == "P" ? ["SP","RP"] : params[:position] == "UTIL" ? ["C","1B","2B","3B","SS","OF"] : params[:position].to_a
+  	# 	@projections = BaseballProjection.any_in(positions: position)
   	else
-  		@projections = BaseballProjection.asc(:rank)
+  		@projections = BaseballProjection.all
   	end
   end
 
