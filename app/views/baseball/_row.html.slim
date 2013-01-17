@@ -1,6 +1,6 @@
 tr id="#{projection.id}"
 	td.actions-draft
-		- if projection.try(:positions).try(:length) > 1
+		- if projection.positions.length > 1
 			div href="#" class="small button dropdown draft"
 				| Draft
 				ul
