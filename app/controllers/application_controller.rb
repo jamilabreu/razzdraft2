@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   private
 
   def load_sport
-  	@sport = request.subdomain.present? ? request.subdomain : "baseball"
+  	@sport = request.subdomain.present? && request.subdomain != "razzdraft" ? request.subdomain : "baseball"
   end
 end
