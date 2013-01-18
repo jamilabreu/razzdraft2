@@ -83,7 +83,9 @@ table tbody tr td.player_name
 
 
 table tbody tr td.blurb
-	@include background(linear-gradient(#FFF06B, #FFFDEB 2%, #FFFDEB 98%, #FFF06B))
+	background: #FFFDEB
+	// @include background(linear-gradient(#FFF06B, #FFFDEB 2%, #FFFDEB 98%, #FFF06B))
+	@include box-shadow(inset 0 0 10px #FFF06B)
 	color: #333
 	font-size: 13px
 	font-weight: 500

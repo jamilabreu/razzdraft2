@@ -2,9 +2,10 @@
 	#drafted_payers
 		= render partial: "baseball/table_drafted"
 - else
-	.panel
-		h4 Welcome to RazzDraft!
-		p Keep tabs on your team stats, Razzball projections, and player blurbs.
+	.twelve.columns
+		.panel
+			h4 Welcome to RazzDraft!
+			p Keep tabs on your team stats, Razzball projections, and player blurbs.
 
 / #available_players
 / = render partial: "baseball/table", locals: { collection: @available }
