@@ -1,35 +1,45 @@
-table
-	thead
-		tr
-			th
-			th
-			th class="#{header_class(:rank)}" data-sort="rank" data-direction="asc"
-				= link_to "#", header_path(:rank, :asc), remote: true
-			th class="#{params[:position] && params[:position] != "ALL" ? 'position-selected' : nil}"
-				= params[:position] && params[:position] != "ALL" ? params[:position] : "POS"
-			th class="#{header_class(:runs)}" data-sort="runs" data-direction="desc"
-				= link_to "R", header_path(:runs, :desc), remote: true
-			th class="#{header_class(:homeruns)}" data-sort="homeruns" data-direction="desc"
-				= link_to "HR", header_path(:homeruns, :desc), remote: true
-			th class="#{header_class(:rbi)}" data-sort="rbi" data-direction="desc"
-				= link_to "RBI", header_path(:rbi, :desc), remote: true
-			th class="#{header_class(:average)}" data-sort="average" data-direction="desc"
-				= link_to "AVG", header_path(:average, :desc), remote: true
-			th class="#{header_class(:steals)}" data-sort="steals" data-direction="desc"
-				= link_to "SB", header_path(:steals, :desc), remote: true
-			th class="#{header_class(:wins)}" data-sort="wins" data-direction="desc"
-				= link_to "W", header_path(:wins, :desc), remote: true
-			th class="#{header_class(:losses)}" data-sort="losses" data-direction="asc"
-				= link_to "L", header_path(:losses, :asc), remote: true
-			th class="#{header_class(:strikeouts)}" data-sort="strikeouts" data-direction="desc"
-				= link_to "K", header_path(:strikeouts, :desc), remote: true
-			th class="#{header_class(:era)}" data-sort="era" data-direction="asc"
-				= link_to "ERA", header_path(:era, :asc), remote: true
-			th class="#{header_class(:whip)}" data-sort="whip" data-direction="asc"
-				= link_to "WHIP", header_path(:whip, :asc), remote: true
-			th class="#{header_class(:saves)}" data-sort="saves" data-direction="desc"
-				= link_to "SV", header_path(:saves, :desc), remote: true
-			th
-			th
-	tbody
-		= render partial: "baseball/row", collection: collection, as: :projection
+.twelve
+	.nine.columns style="padding-right: 0"
+		#available_players
+			table
+				thead
+					tr
+						th
+						th
+						th class="#{header_class(:rank)}" data-sort="rank" data-direction="asc"
+							= link_to "#", header_path(:rank, :asc), remote: true
+						th class="#{params[:position] && params[:position] != "ALL" ? 'position-selected' : nil}"
+							= params[:position] && params[:position] != "ALL" ? params[:position] : "POS"
+						th class="#{header_class(:runs)}" data-sort="runs" data-direction="desc"
+							= link_to "R", header_path(:runs, :desc), remote: true
+						th class="#{header_class(:homeruns)}" data-sort="homeruns" data-direction="desc"
+							= link_to "HR", header_path(:homeruns, :desc), remote: true
+						th class="#{header_class(:rbi)}" data-sort="rbi" data-direction="desc"
+							= link_to "RBI", header_path(:rbi, :desc), remote: true
+						th class="#{header_class(:average)}" data-sort="average" data-direction="desc"
+							= link_to "AVG", header_path(:average, :desc), remote: true
+						th class="#{header_class(:steals)}" data-sort="steals" data-direction="desc"
+							= link_to "SB", header_path(:steals, :desc), remote: true
+						th class="#{header_class(:wins)}" data-sort="wins" data-direction="desc"
+							= link_to "W", header_path(:wins, :desc), remote: true
+						th class="#{header_class(:losses)}" data-sort="losses" data-direction="asc"
+							= link_to "L", header_path(:losses, :asc), remote: true
+						th class="#{header_class(:strikeouts)}" data-sort="strikeouts" data-direction="desc"
+							= link_to "K", header_path(:strikeouts, :desc), remote: true
+						th class="#{header_class(:era)}" data-sort="era" data-direction="asc"
+							= link_to "ERA", header_path(:era, :asc), remote: true
+						th class="#{header_class(:whip)}" data-sort="whip" data-direction="asc"
+							= link_to "WHIP", header_path(:whip, :asc), remote: true
+						th class="#{header_class(:saves)}" data-sort="saves" data-direction="desc"
+							= link_to "SV", header_path(:saves, :desc), remote: true
+						th
+						th
+				tbody
+					= render partial: "baseball/row", collection: collection, as: :projection
+.three.columns
+	- 3.times do
+		a.show-for-medium href="#" class="th" style="margin-bottom: 15px"
+			img src="http://placehold.it/160x450" style="margin: 0 auto"
+	- 3.times do
+		a.hide-for-medium-down href="#" class="th" style="margin-bottom: 15px"
+			img src="http://placehold.it/300x250" style="margin: 0 auto"
