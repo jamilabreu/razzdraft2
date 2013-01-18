@@ -21,6 +21,9 @@ class BaseballController < ApplicationController
     if (@projection.positions & ["SP","RP"]).empty?
       @team.inc(:batters, 1)
       @team.add_to_set(:averages, @projection.average)
+      # Average Stats
+      @average = ((@team.averages.inject(:+))/@team.batters.to_f)
+      @team.update_attribute(:average, @average)
     else
       @team.inc(:pitchers, 1)
     end
@@ -30,9 +33,34 @@ class BaseballController < ApplicationController
       @team.inc(stat.to_sym, @projection.send(stat.to_sym))
     end
 
-    # Average Stats
-    @average = ((@team.averages.inject(:+))/@team.batters.to_f)
-    @team.update_attribute(:average, @average)
+    redirect_to root_path
+  end
+
+  def undraft_player
+    @team = BaseballTeam.find_or_create_by(user_id: current_user.id)
+    @projection = BaseballProjection.find(params[:id])
+    @team.baseball_projections.delete(@projection)
+    @team.pull(params[:position].to_sym, @projection.id)
+
+    # Counter
+    if (@projection.positions & ["SP","RP"]).empty?
+      @team.inc(:batters, -1)
+      @team.pull(:averages, @projection.average)
+      # Average Stats
+      if @team.averages.present?
+        @average = ((@team.averages.inject(:+))/@team.batters.to_f)
+        @team.update_attribute(:average, @average)
+      else
+        @team.update_attribute(:average, 0)
+      end
+    else
+      @team.inc(:pitchers, -1)
+    end
+
+    # Remove Stats
+    %w( runs homeruns rbi steals wins losses strikeouts saves).each do |stat|
+      @team.inc(stat.to_sym, -(@projection.send(stat.to_sym)))
+    end
 
     redirect_to root_path
   end

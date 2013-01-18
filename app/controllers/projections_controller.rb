@@ -20,7 +20,7 @@ class ProjectionsController < ApplicationController
 					instance_variable_set("@#{variable}", BaseballProjection.any_in(id: current_user.baseball_team.send(method.to_sym)))
 				end
 			else
-				@available = BaseballProjection.all#order_by(sort_by.send(sort_direction))
+				@available = BaseballProjection.all
 			end
 
 			stat = params[:sort] ? params[:sort].to_sym : :rank

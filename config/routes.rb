@@ -7,6 +7,7 @@ Razzdraft::Application.routes.draw do
   # match 'sort' => 'projections#sort', as: 'sort'
   match 'baseball/search' => 'baseball#search', as: 'baseball_search'
   match 'baseball/draft_player/:id' => 'baseball#draft_player', as: 'draft_player'
+  match 'baseball/undraft_player/:id' => 'baseball#undraft_player', as: 'undraft_player'
   match '', to: 'projections#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   root to: "projections#index"
 

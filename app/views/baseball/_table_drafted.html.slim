@@ -3,7 +3,7 @@
 		table.left_table
 			thead
 				tr
-					td #
+					td
 					th POS
 					th
 					th R
@@ -16,6 +16,8 @@
 					- instance_variable_get("@#{variable}").each do |projection|
 						tr
 							td
+								= link_to undraft_player_path(projection, position: projection.position), class:"tiny undraft" do
+									i class="general foundicon-minus"
 							td= position
 							td= projection.name
 							td= projection.runs
@@ -36,7 +38,7 @@
 		table.right_table
 			thead
 				tr
-					th #
+					th
 					th POS
 					th
 					th W
@@ -50,6 +52,8 @@
 					- instance_variable_get("@#{variable}").each do |projection|
 						tr
 							td
+								= link_to undraft_player_path(projection, position: projection.position), class:"tiny undraft" do
+									i class="general foundicon-minus"
 							td= position
 							td= projection.name
 							td= projection.wins
