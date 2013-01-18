@@ -5,9 +5,9 @@ tr id="#{projection.id}"
 				| Draft
 				ul
 					- projection.positions.each do |position|
-						li= link_to position, user_signed_in? ? draft_player_path(projection, position: position.strip) : new_user_registration_path
+						li= link_to position, user_signed_in? ? draft_player_path(projection, position: position.strip) : new_user_registration_path, disable_with: "Draft ..."
 		- else
-			= link_to user_signed_in? ? draft_player_path(projection, position: projection.position) : new_user_registration_path, class:"small button draft" do
+			= link_to user_signed_in? ? draft_player_path(projection, position: projection.position) : new_user_registration_path, class:"small button draft", disable_with: "Draft ..." do
 				|	Draft
 				i class="general foundicon-plus"
 	td.player_name

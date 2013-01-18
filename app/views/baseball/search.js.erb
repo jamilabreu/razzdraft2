@@ -3,6 +3,7 @@ $('#available_players').html('<%= j render partial: "table", locals: { collectio
 	<% if @projections.length < 5 %>
 		$('.player_name:first a').click();
 	<% end %>
+	$('#player_search').css({background: "#FFF"});
 <% else %>
-	$('#player_search').css({background: "#ff0"});
+	$('#player_search').css({background: "#FF0"});
 <% end %>

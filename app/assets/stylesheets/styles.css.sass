@@ -36,6 +36,7 @@ table
 	@include border-radius(0)
 
 table thead tr th
+	border-top: 1px solid #EAEAEA
 	padding: 0
 	font-size: 12px
 	text-align: center
@@ -50,13 +51,12 @@ table thead tr th.selected
 	a
 		color: #FFF
 
-// table thead tr th.position-selected
-// 	background: #2ba6cb
-// 	border: 1px solid #1e728c
-// 	color: #FFF
-
 table tbody tr:last-child td
 	border-bottom: 1px solid #EAEAEA
+
+table tbody tr.total td
+	background: #FF0
+	color: #807e00
 
 table tbody tr td
 	border-top: 1px solid #EAEAEA
@@ -138,6 +138,7 @@ table tbody tr td.actions-draft
 	width: 7%
 	min-width: 70px
 	a, div
+		min-width: 70px
 		i
 			padding-left: 3px
 
@@ -158,11 +159,11 @@ table tbody tr td.actions-taken
 	margin-top: 18px
 
 #drafted_payers table.left_table
-	padding: 0 15px
+	padding-right: 0
 	width: 100%
 
 #drafted_payers table.right_table
-	padding: 0 15px 0 0
+	padding-left: 0
 	width: 100%
 
 #drafted_payers table tbody tr td a i

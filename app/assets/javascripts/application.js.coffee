@@ -15,7 +15,7 @@ jQuery ->
 
 	$('#position_search').on 'change', () ->
 		position = $('#position_search').val()
-		if position == "ALL"
+		if position == "POS"
 			url = "/"
 		else if $('.selected')[0]
 			url = "?position=" + position + "&direction=" + $('.selected').data('direction') + "&sort=" + $('.selected').data('sort')

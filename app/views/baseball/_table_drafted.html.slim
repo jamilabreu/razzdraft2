@@ -1,5 +1,5 @@
 .twelve
-	.six style="float: left"
+	.six.columns style="padding-right: 8px"
 		table.left_table
 			thead
 				tr
@@ -16,7 +16,7 @@
 					- instance_variable_get("@#{variable}").each do |projection|
 						tr
 							td
-								= link_to undraft_player_path(projection, position: projection.position), class:"tiny undraft" do
+								= link_to undraft_player_path(projection, position: projection.position), class:"tiny undraft", disable_with: "..." do
 									i class="general foundicon-minus"
 							td= position
 							td= projection.name
@@ -25,7 +25,7 @@
 							td= projection.rbi
 							td= projection.average_f
 							td= projection.steals
-				tr
+				tr.total
 					td
 					td Total
 					td
@@ -34,7 +34,7 @@
 					td= current_user.baseball_team.rbi
 					td= current_user.baseball_team.average_f
 					td= current_user.baseball_team.steals
-	.six style="float: right"
+	.six.columns style="padding-left: 8px"
 		table.right_table
 			thead
 				tr
@@ -62,7 +62,7 @@
 							td= projection.era_f
 							td= projection.whip_f
 							td= projection.saves
-				tr
+				tr.total
 					td
 					td Total
 					td
