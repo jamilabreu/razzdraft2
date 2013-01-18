@@ -5,21 +5,25 @@
 				ul
 					li.name
 						h1= link_to "RazzDraft", root_path
-					li.search
-						form.collapse
-							input id="player_search" placeholder="Player Search" type="search"
-					li
-						= select_tag :position_search, options_for_select(["POS","C","1B","2B","SS","3B","MI","CI","OF","UTIL","P","SP","RP"], selected: params[:position])
-					li.toggle-topbar= link_to "", "#"
+					- if current_page?(root_path)
+						li.search
+							form.collapse
+								input id="player_search" placeholder="Player Search" type="search"
+						li
+							= select_tag :position_search, options_for_select(["POS","C","1B","2B","SS","3B","MI","CI","OF","UTIL","P","SP","RP"], selected: params[:position])
+						li.toggle-topbar= link_to "", "#"
 				section
 					ul.right
 						- if user_signed_in?
-							li= link_to "Roster", "#"
-							li.active= link_to "Free Agents", "#"
+							/ li= link_to "Roster", "#"
+							li class="#{ current_page?(root_path) ? 'active' : nil }"
+								= link_to "Free Agents", root_path
+							li class="#{ current_page?(removed_players_path) ? 'active' : nil }"
+								= link_to "Taken Players", removed_players_path
 							li.has-dropdown
-								= link_to "More", "#"
+								= link_to "#" do
+									i class="general foundicon-settings"
 								ul.dropdown
-									li= link_to "Taken Players", "#"
 									li= link_to "Logout", destroy_user_session_path, method: :delete
 						-	else
 							li= link_to "Sign Up", new_user_registration_path

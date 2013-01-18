@@ -28,7 +28,11 @@ tr id="#{projection.id}"
 	td.projection class="#{impact_inverse(projection.whip,1.10,1.20,1.30)}"= projection.whip_f
 	td.projection class="#{impact(projection.saves,30,20,10)}"= projection.saves
 	td.actions-taken
-		= link_to root_path, class: "" do
-			i class="general foundicon-remove"
+		- if removed
+			= link_to restore_player_path(projection), class: "" do
+				i class="general foundicon-plus"
+		- else
+			= link_to remove_player_path(projection), class: "" do
+				i class="general foundicon-remove"
 
 /root_path(projection.positions.first.to_sym => params[projection.positions.first.to_sym] ? params[projection.positions.first.to_sym] + [projection] : [projection])

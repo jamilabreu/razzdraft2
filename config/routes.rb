@@ -8,6 +8,9 @@ Razzdraft::Application.routes.draw do
   match 'baseball/search' => 'baseball#search', as: 'baseball_search'
   match 'baseball/draft_player/:id' => 'baseball#draft_player', as: 'draft_player'
   match 'baseball/undraft_player/:id' => 'baseball#undraft_player', as: 'undraft_player'
+  match 'baseball/remove_player/:id' => 'baseball#remove_player', as: 'remove_player'
+  match 'baseball/restore_player/:id' => 'baseball#restore_player', as: 'restore_player'
+  match 'baseball/removed_players' => 'baseball#removed_players', as: 'removed_players'
   match '', to: 'projections#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   root to: "projections#index"
 

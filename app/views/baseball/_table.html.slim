@@ -35,7 +35,7 @@
 						th
 						th
 				tbody
-					= render partial: "baseball/row", collection: collection, as: :projection
+					= render partial: "baseball/row", collection: collection, as: :projection, locals: { removed: removed }
 .three.columns
 	- 3.times do
 		a.show-for-medium href="#" class="th" style="margin-bottom: 15px"

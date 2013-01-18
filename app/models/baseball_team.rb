@@ -26,6 +26,7 @@ class BaseballTeam
   field :whip, type: Float, default: ->{ 0.00 }
   field :strikeouts, type: Integer, default: ->{ 0 }
   field :saves, type: Integer, default: ->{ 0 }
+  field :removed, type: Array
 
   def average_f
     ("%0.3f" % average).sub!(/^0/, "")

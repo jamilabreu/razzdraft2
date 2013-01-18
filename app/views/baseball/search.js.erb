@@ -1,5 +1,5 @@
 <% if @projections.length > 0 %>
-$('#available_players').html('<%= j render partial: "table", locals: { collection: @projections } %>');
+$('#available_players').html('<%= j render partial: "table", locals: { collection: @projections, removed: false } %>');
 	<% if @projections.length < 5 %>
 		$('.player_name:first a').click();
 	<% end %>

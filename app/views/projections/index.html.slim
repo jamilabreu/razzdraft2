@@ -1,4 +1,4 @@
-- if current_user.try(:baseball_team)
+- if current_user.try(:baseball_team).try(:baseball_projections).try(:present?)
 	#drafted_payers
 		= render partial: "baseball/table_drafted"
 - else
@@ -8,5 +8,5 @@
 			p Keep tabs on your team stats, Razzball projections, and player blurbs.
 
 #available_players
-	= render partial: "baseball/table", locals: { collection: @available }
+	= render partial: "baseball/table", locals: { collection: @available, removed: false }
 

@@ -5,7 +5,8 @@ class ProjectionsController < ApplicationController
 		else
 			if current_user.try(:baseball_team)
 				@drafted = BaseballProjection.any_in(id: current_user.baseball_team.baseball_projection_ids)
-				@available = BaseballProjection.not_in(id: current_user.baseball_team.baseball_projection_ids)
+				@removed = BaseballProjection.any_in(id: current_user.baseball_team.removed)
+				@available = BaseballProjection.not_in(id: current_user.baseball_team.baseball_projection_ids + current_user.baseball_team.removed)
 				@hitters_hash = { "catcher" => "C",
 					"first_base" => "1B",
 					"second_base" => "2B",
