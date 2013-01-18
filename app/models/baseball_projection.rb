@@ -52,7 +52,7 @@ class BaseballProjection
   end
 
   def fix_blurb
-    self.blurb = blurb.gsub(/<a href/, "<a target='_blank' href").gsub(/ñ/," ").gsub(/æ/, " ").gsub(/Í/,"'").gsub(/î/, " ") if self.blurb
+    self.blurb = blurb.gsub(/<a href/, "<a target='_blank' href").gsub(/_/," ").gsub(/Ð/, " ").gsub(/Ó/,"'") if self.blurb
   end
   def average_f
     ("%0.3f" % average).sub!(/^0/, "")

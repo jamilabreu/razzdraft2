@@ -1,11 +1,23 @@
-- if current_user.try(:baseball_team)
-	#drafted_payers
+.twelve.columns
+	- if current_user.try(:baseball_team)
+		#drafted_payers
 		= render partial: "baseball/table_drafted"
-- else
-	.twelve.columns
+	- else
 		.panel
 			h4 Welcome to RazzDraft!
 			p Keep tabs on your team stats, Razzball projections, and player blurbs.
 
-#available_players
-	= render partial: "baseball/table", locals: { collection: @available }
+/ #available_players
+/ = render partial: "baseball/table", locals: { collection: @available }
+
+.nine.columns style="padding-right: 0"
+	#available_players
+		= render partial: "baseball/table", locals: { collection: @available }
+
+.three.columns
+	- 3.times do
+		a.show-for-medium href="#" class="th" style="margin-bottom: 15px"
+			img src="http://placehold.it/160x450" style="margin: 0 auto"
+	- 3.times do
+		a.hide-for-medium-down href="#" class="th" style="margin-bottom: 15px"
+			img src="http://placehold.it/300x250" style="margin: 0 auto"
