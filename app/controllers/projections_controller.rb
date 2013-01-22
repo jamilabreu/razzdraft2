@@ -3,23 +3,34 @@ class ProjectionsController < ApplicationController
 		if @sport == "football"
 			@available = FootballProjection.desc(:touchdowns)
 		else
+			@hitters_hash = { "catcher" => "C",
+				"first_base" => "1B",
+				"second_base" => "2B",
+				"shortstop" => "SS",
+				"third_base" => "3B",
+				"outfield" => "OF",
+				"util" => "UTIL"}
+			@pitchers_hash = {
+				"starter" => "SP",
+				"reliever" => "RP",
+				"pitcher" => "P" }
+
+			@extra_hash = {
+				"middle_infielder" => "MI",
+				"corner_infielder" => "CI"
+			}
+			@positions_hash = @hitters_hash.merge(@pitchers_hash)
+			@extra_positions_hash = @positions_hash.merge(@extra_hash)
+
 			if current_user.try(:baseball_team)
-				@drafted = BaseballProjection.any_in(id: current_user.baseball_team.baseball_projection_ids)
-				@removed = BaseballProjection.any_in(id: current_user.baseball_team.removed)
-				@available = BaseballProjection.not_in(id: current_user.baseball_team.baseball_projection_ids + current_user.baseball_team.removed)
-				@hitters_hash = { "catcher" => "C",
-					"first_base" => "1B",
-					"second_base" => "2B",
-					"shortstop" => "SS",
-					"third_base" => "3B",
-					"outfield" => "OF",
-					"utility" => "UTIL"}
-				@pitchers_hash = {
-					"starter" => "SP",
-					"reliever" => "RP" }
-				@hitters_hash.merge(@pitchers_hash).each do |variable, method|
-					instance_variable_set("@#{variable}", BaseballProjection.any_in(id: current_user.baseball_team.send(method.to_sym)))
-				end
+				drafted_ids = current_user.baseball_team.baseball_projection_ids || []
+				removed_ids = current_user.baseball_team.removed || []
+				@drafted = BaseballProjection.any_in(id: drafted_ids)
+				@removed = BaseballProjection.any_in(id: removed_ids)
+				@available = BaseballProjection.not_in(id: drafted_ids + removed_ids)
+				# @positions_hash.each do |variable, method|
+				# 	instance_variable_set("@#{variable}", BaseballProjection.any_in(id: current_user.baseball_team.send(method.to_sym)))
+				# end
 			else
 				@available = BaseballProjection.all
 			end

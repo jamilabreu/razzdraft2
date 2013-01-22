@@ -3,6 +3,8 @@
 #= require foundation
 
 jQuery ->
+	$('.alert-box').hide().slideToggle().delay(6000).slideToggle()
+
 	$('#player_search').on 'keyup', () ->
 		query = $('#player_search').val()
 		$.ajax({

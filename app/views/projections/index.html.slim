@@ -1,11 +1,33 @@
-- if current_user.try(:baseball_team).try(:baseball_projections).try(:present?)
+- if current_user.try(:baseball_team)
 	#drafted_payers
 		= render partial: "baseball/table_drafted"
+
+- elsif user_signed_in?
+	.twelve.columns
+		.panel.group
+			p Select your league type or customize positions to begin drafting.
+			= form_for current_user.build_baseball_team do |f|
+				- @extra_positions_hash.each do |field, label|
+					div.group
+						= f.label (field + "_max").to_sym, label
+						- if ["MI","CI"].include?(label)
+							= f.select (field + "_max").to_sym, 0..3
+						- elsif ["P","OF"].include?(label)
+							= f.select (field + "_max").to_sym, 3..5
+						- else
+							= f.select (field + "_max").to_sym, 1..3
+				div style="clear: left; margin-top: 15px"
+					= f.submit "Create League", class: "radius success button"
 - else
 	.twelve.columns
 		.panel
-			h4 Welcome to RazzDraft!
-			p Keep tabs on your team stats, Razzball projections, and player blurbs.
+			h4 Welcome to Razzdraft!
+			p a customizable war-room with instant access to Razzball player projections and blurbs.
+			= link_to new_user_registration_path, class: "radius success button" do
+				i.general.foundicon-plus style="margin: 0 5px 0 0"
+				| Create New User
+				/ span style="margin-left: 10px; font-weight: 700"
+				/ 	|
 
 #available_players
 	= render partial: "baseball/table", locals: { collection: @available, removed: false }

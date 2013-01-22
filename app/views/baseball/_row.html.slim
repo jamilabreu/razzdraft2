@@ -5,11 +5,20 @@ tr id="#{projection.id}"
 				| Draft
 				ul
 					- projection.positions.each do |position|
-						li= link_to position, user_signed_in? ? draft_player_path(projection, position: position.strip) : new_user_registration_path, disable_with: "Draft ..."
+						li= link_to position, user_signed_in? ? draft_player_path(projection, position: position.strip, position_name: position_name(projection.position.strip)) : new_user_registration_path, disable_with: "Draft ..."
 		- else
-			= link_to user_signed_in? ? draft_player_path(projection, position: projection.position) : new_user_registration_path, class:"small button draft", disable_with: "Draft ..." do
-				|	Draft
-				i class="general foundicon-plus"
+			- if user_signed_in? && BaseballTeam.where(user_id: current_user.id).present?
+				= link_to draft_player_path(projection, position: projection.position, position_name: position_name(projection.position)), class:"small button draft", disable_with: "Draft ..." do
+					|	Draft
+					i class="general foundicon-plus"
+			- elsif user_signed_in?
+				= link_to root_path, class:"small button draft", disable_with: "Draft ..." do
+					|	Draft
+					i class="general foundicon-plus"
+			- else
+				= link_to new_user_registration_path, class:"small button draft", disable_with: "Draft ..." do
+					|	Draft
+					i class="general foundicon-plus"
 	td.player_name
 		= link_to show_blurb_path(projection), remote: true do
 			i class="general foundicon-add-doc"

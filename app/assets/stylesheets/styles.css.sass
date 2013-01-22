@@ -8,6 +8,11 @@ i
 body
 	-webkit-font-smoothing: antialiased
 
+.group:after
+	content: ""
+	display: table
+	clear: both
+
 .top-bar
 	background: #222
 	margin: 0
@@ -22,6 +27,13 @@ body
 	background: #333
 	a
 		color: #FFF
+
+div.alert-box
+	padding: 6px 15px 7px
+	@include border-radius(0)
+
+div.alert-box a.close
+	opacity: 0.5
 
 .panel
 	margin: 20px 0
@@ -154,6 +166,16 @@ table tbody tr td.actions-taken
 	padding: 4px 14px 5px
 
 /* TEAM -----------------------------------------------------------------------------------------*/
+#new_baseball_team
+	div
+		float: left
+		margin-right: 10px
+	label
+		float: left
+		font-weight: 700
+
+
+
 #drafted_payers
 	margin-top: 18px
 

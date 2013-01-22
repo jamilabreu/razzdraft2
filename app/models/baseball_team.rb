@@ -12,8 +12,23 @@ class BaseballTeam
   field :"UTIL", type: Array
   field :"SP", type: Array
   field :"RP", type: Array
+  field :"P", type: Array
   field :batters, type: Integer, default: ->{ 0 }
   field :pitchers, type: Integer, default: ->{ 0 }
+
+  field :catcher_max
+  field :first_base_max
+  field :second_base_max
+  field :shortstop_max
+  field :third_base_max
+  field :outfield_max
+  field :util_max
+  field :starter_max
+  field :reliever_max
+  field :pitcher_max
+  field :middle_infielder_max
+  field :corner_infielder_max
+
   field :runs, type: Integer, default: ->{ 0 }
   field :homeruns, type: Integer, default: ->{ 0 }
   field :rbi, type: Integer, default: ->{ 0 }

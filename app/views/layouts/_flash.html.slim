@@ -1,4 +1,4 @@
-	- if alert || notice
-		.alert
-			button.close data-dismiss="alert" type="button" ×
-			= content_tag :div, alert || notice
+.alert-box.alert
+	= content_tag :div, alert || notice
+	a href="" class="close"
+		| ×

@@ -13,18 +13,42 @@
 					th SB
 			tbody
 				- @hitters_hash.each do |variable, position|
-					- instance_variable_get("@#{variable}").each do |projection|
-						tr
-							td
-								= link_to undraft_player_path(projection, position: projection.position), class:"tiny undraft", disable_with: "..." do
-									i class="general foundicon-minus"
-							td= position
-							td= projection.name
-							td= projection.runs
-							td= projection.homeruns
-							td= projection.rbi
-							td= projection.average_f
-							td= projection.steals
+					- p = current_user.baseball_team.send("#{position}".to_sym)
+					- if p.present?
+						- p.each do |id|
+							- projection = BaseballProjection.find(id)
+							tr
+								td
+									= link_to undraft_player_path(projection, position: projection.position), class:"tiny undraft", disable_with: "..." do
+										i class="general foundicon-minus"
+								td= position
+								td= projection.name
+								td= projection.runs
+								td= projection.homeruns
+								td= projection.rbi
+								td= projection.average_f
+								td= projection.steals
+						- (current_user.baseball_team.send("#{variable}_max".to_sym).to_i - p.length).times do
+							tr
+								td
+								td= position
+								td
+								td
+								td
+								td
+								td
+								td
+					- else
+						- current_user.baseball_team.send("#{variable}_max".to_sym).to_i.times do
+							tr
+								td
+								td= position
+								td
+								td
+								td
+								td
+								td
+								td
 				tr.total
 					td
 					td Total
@@ -34,6 +58,7 @@
 					td= current_user.baseball_team.rbi
 					td= current_user.baseball_team.average_f
 					td= current_user.baseball_team.steals
+
 	.six.columns style="padding-left: 8px"
 		table.right_table
 			thead
@@ -49,19 +74,44 @@
 					th SV
 			tbody
 				- @pitchers_hash.each do |variable, position|
-					- instance_variable_get("@#{variable}").each do |projection|
-						tr
-							td
-								= link_to undraft_player_path(projection, position: projection.position), class:"tiny undraft" do
-									i class="general foundicon-minus"
-							td= position
-							td= projection.name
-							td= projection.wins
-							td= projection.losses
-							td= projection.strikeouts
-							td= projection.era_f
-							td= projection.whip_f
-							td= projection.saves
+					- p = current_user.baseball_team.send("#{position}".to_sym)
+					- if p.present?
+						- p.each do |id|
+							- projection = BaseballProjection.find(id)
+							tr
+								td
+									= link_to undraft_player_path(projection, position: projection.position), class:"tiny undraft", disable_with: "..." do
+										i class="general foundicon-minus"
+								td= position
+								td= projection.name
+								td= projection.wins
+								td= projection.losses
+								td= projection.strikeouts
+								td= projection.era_f
+								td= projection.whip_f
+								td= projection.saves
+						- (current_user.baseball_team.send("#{variable}_max".to_sym).to_i - p.length).times do
+							tr
+								td
+								td= position
+								td
+								td
+								td
+								td
+								td
+								td
+					- else
+						- current_user.baseball_team.send("#{variable}_max".to_sym).to_i.times do
+							tr
+								td
+								td= position
+								td
+								td
+								td
+								td
+								td
+								td
+								td
 				tr.total
 					td
 					td Total
