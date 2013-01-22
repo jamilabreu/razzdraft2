@@ -8,19 +8,15 @@ class ProjectionsController < ApplicationController
 				"second_base" => "2B",
 				"shortstop" => "SS",
 				"third_base" => "3B",
+				"middle_infielder" => "MI",
+				"corner_infielder" => "CI",
 				"outfield" => "OF",
 				"util" => "UTIL"}
 			@pitchers_hash = {
 				"starter" => "SP",
 				"reliever" => "RP",
 				"pitcher" => "P" }
-
-			@extra_hash = {
-				"middle_infielder" => "MI",
-				"corner_infielder" => "CI"
-			}
 			@positions_hash = @hitters_hash.merge(@pitchers_hash)
-			@extra_positions_hash = @positions_hash.merge(@extra_hash)
 
 			if current_user.try(:baseball_team)
 				drafted_ids = current_user.baseball_team.baseball_projection_ids || []

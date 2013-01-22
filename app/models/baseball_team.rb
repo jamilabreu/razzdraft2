@@ -8,6 +8,8 @@ class BaseballTeam
   field :"2B", type: Array
   field :"SS", type: Array
   field :"3B", type: Array
+  field :"MI", type: Array
+  field :"CI", type: Array
   field :"OF", type: Array
   field :"UTIL", type: Array
   field :"SP", type: Array

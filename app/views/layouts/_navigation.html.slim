@@ -24,6 +24,9 @@
 								= link_to "#" do
 									i class="general foundicon-settings"
 								ul.dropdown
+									- if BaseballTeam.where(user_id: current_user.id).first.present?
+										li
+											= link_to "Delete Team", baseball_team_path(current_user.baseball_team.id), method: :delete
 									li= link_to "Logout", destroy_user_session_path, method: :delete
 						-	else
 							/ li= link_to "Create New User", new_user_registration_path

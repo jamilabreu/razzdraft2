@@ -17,17 +17,38 @@ class BaseballController < ApplicationController
 
 
 
-    # Check Position Availability
+    # If Position Full
     if @team && @team.send(params[:position].to_s).present? && (@team.send(params[:position].to_s).length >= @team.send("#{params[:position_name]}_max".to_sym).to_i)
       # If Batter
       if (@projection.positions & ["SP","RP"]).empty?
-        # Check UTIL Availability
-        if @team.send(:"UTIL").present? && (@team.send(:"UTIL").length >= @team.send(:util_max).to_i)
-          redirect_to root_path, notice: "All slots for #{params[:position]} are full. Please remove a player to add #{@projection.name}."
-        else
-          # Add as UTIL
+        # If MI
+        if params[:position] == "2B" || params[:position] == "SS"
+          # If MI Full
+          if @team.send(:"MI").present? && (@team.send(:"MI").length >= @team.send(:middle_infielder_max).to_i)
+            # If UTIL Full
+            if @team.send(:"UTIL").present? && (@team.send(:"UTIL").length >= @team.send(:util_max).to_i)
+              redirect_to root_path, notice: "All slots for #{params[:position]} are full. Please remove a player to add #{@projection.name}."
+            else
+              # Add as UTIL
+                @team.baseball_projections << @projection
+                @team.add_to_set(:"UTIL", @projection.id)
+
+                # Counter
+                @team.inc(:batters, 1)
+                @team.add_to_set(:averages, @projection.average)
+                # Average Stats
+                @average = ((@team.averages.inject(:+))/@team.batters.to_f)
+                @team.update_attribute(:average, @average)
+                # Add Stats
+                %w( runs homeruns rbi steals ).each do |stat|
+                  @team.inc(stat.to_sym, @projection.send(stat.to_sym))
+                end
+                redirect_to root_path
+            end
+          else
+            # Add as MI
             @team.baseball_projections << @projection
-            @team.add_to_set(:"UTIL", @projection.id)
+            @team.add_to_set(:"MI", @projection.id)
 
             # Counter
             @team.inc(:batters, 1)
@@ -40,6 +61,69 @@ class BaseballController < ApplicationController
               @team.inc(stat.to_sym, @projection.send(stat.to_sym))
             end
             redirect_to root_path
+          end
+        # IF CI
+        elsif params[:position] == "1B" || params[:position] == "3B"
+         # If CI Full
+          if @team.send(:"CI").present? && (@team.send(:"CI").length >= @team.send(:corner_infielder_max).to_i)
+            # If UTIL Full
+            if @team.send(:"UTIL").present? && (@team.send(:"UTIL").length >= @team.send(:util_max).to_i)
+              redirect_to root_path, notice: "All slots for #{params[:position]} are full. Please remove a player to add #{@projection.name}."
+            else
+              # Add as UTIL
+                @team.baseball_projections << @projection
+                @team.add_to_set(:"UTIL", @projection.id)
+
+                # Counter
+                @team.inc(:batters, 1)
+                @team.add_to_set(:averages, @projection.average)
+                # Average Stats
+                @average = ((@team.averages.inject(:+))/@team.batters.to_f)
+                @team.update_attribute(:average, @average)
+                # Add Stats
+                %w( runs homeruns rbi steals ).each do |stat|
+                  @team.inc(stat.to_sym, @projection.send(stat.to_sym))
+                end
+                redirect_to root_path
+            end
+          else
+            # Add as CI
+            @team.baseball_projections << @projection
+            @team.add_to_set(:"CI", @projection.id)
+
+            # Counter
+            @team.inc(:batters, 1)
+            @team.add_to_set(:averages, @projection.average)
+            # Average Stats
+            @average = ((@team.averages.inject(:+))/@team.batters.to_f)
+            @team.update_attribute(:average, @average)
+            # Add Stats
+            %w( runs homeruns rbi steals ).each do |stat|
+              @team.inc(stat.to_sym, @projection.send(stat.to_sym))
+            end
+            redirect_to root_path
+          end
+        else
+          # IF UTIL Full
+          if @team.send(:"UTIL").present? && (@team.send(:"UTIL").length >= @team.send(:util_max).to_i)
+            redirect_to root_path, notice: "All slots for #{params[:position]} are full. Please remove a player to add #{@projection.name}."
+          else
+            # Add as UTIL
+              @team.baseball_projections << @projection
+              @team.add_to_set(:"UTIL", @projection.id)
+
+              # Counter
+              @team.inc(:batters, 1)
+              @team.add_to_set(:averages, @projection.average)
+              # Average Stats
+              @average = ((@team.averages.inject(:+))/@team.batters.to_f)
+              @team.update_attribute(:average, @average)
+              # Add Stats
+              %w( runs homeruns rbi steals ).each do |stat|
+                @team.inc(stat.to_sym, @projection.send(stat.to_sym))
+              end
+              redirect_to root_path
+          end
         end
       # If Pitcher
       else
@@ -88,7 +172,9 @@ class BaseballController < ApplicationController
     @team = BaseballTeam.find_or_create_by(user_id: current_user.id)
     @projection = BaseballProjection.find(params[:id])
     @team.baseball_projections.delete(@projection)
-    @team.pull(params[:position].to_sym, @projection.id)
+    %w( 1B 2B SS 3B MI CI UTIL SP RP P ).each do |position|
+      @team.pull(position.to_sym, @projection.id)
+    end
 
     # Counter
     if (@projection.positions & ["SP","RP"]).empty?

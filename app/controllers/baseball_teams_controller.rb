@@ -5,4 +5,9 @@ class BaseballTeamsController < ApplicationController
 		@baseball_team.save
 		redirect_to root_path
 	end
+	def destroy
+		@baseball_team = BaseballTeam.find(params[:id])
+    @baseball_team.destroy
+    redirect_to root_path
+	end
 end

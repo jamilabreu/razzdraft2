@@ -7,7 +7,7 @@
 		.panel.group
 			p Select your league type or customize positions to begin drafting.
 			= form_for current_user.build_baseball_team do |f|
-				- @extra_positions_hash.each do |field, label|
+				- @positions_hash.each do |field, label|
 					div.group
 						= f.label (field + "_max").to_sym, label
 						- if ["MI","CI"].include?(label)

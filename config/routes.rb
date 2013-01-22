@@ -13,7 +13,6 @@ Razzdraft::Application.routes.draw do
   match 'baseball/remove_player/:id' => 'baseball#remove_player', as: 'remove_player'
   match 'baseball/restore_player/:id' => 'baseball#restore_player', as: 'restore_player'
   match 'baseball/removed_players' => 'baseball#removed_players', as: 'removed_players'
-
   match '', to: 'projections#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   root to: "projections#index"
 

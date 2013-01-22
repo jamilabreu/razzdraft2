@@ -19,7 +19,7 @@
 							- projection = BaseballProjection.find(id)
 							tr
 								td
-									= link_to undraft_player_path(projection, position: projection.position), class:"tiny undraft", disable_with: "..." do
+									= link_to undraft_player_path(projection), class:"tiny undraft", disable_with: "..." do
 										i class="general foundicon-minus"
 								td= position
 								td= projection.name
@@ -80,7 +80,7 @@
 							- projection = BaseballProjection.find(id)
 							tr
 								td
-									= link_to undraft_player_path(projection, position: projection.position), class:"tiny undraft", disable_with: "..." do
+									= link_to undraft_player_path(projection), class:"tiny undraft", disable_with: "..." do
 										i class="general foundicon-minus"
 								td= position
 								td= projection.name

@@ -5,9 +5,13 @@ tr id="#{projection.id}"
 				| Draft
 				ul
 					- projection.positions.each do |position|
-						li= link_to position, user_signed_in? ? draft_player_path(projection, position: position.strip, position_name: position_name(projection.position.strip)) : new_user_registration_path, disable_with: "Draft ..."
+						li
+							- if user_signed_in?
+								= link_to position, draft_player_path(projection, position: position.strip, position_name: position_name(position.strip)), disable_with: "Draft ..."
+							- else
+								= link_to position, new_user_registration_path
 		- else
-			- if user_signed_in? && BaseballTeam.where(user_id: current_user.id).present?
+			- if user_signed_in? && BaseballTeam.where(user_id: current_user.id).first.present?
 				= link_to draft_player_path(projection, position: projection.position, position_name: position_name(projection.position)), class:"small button draft", disable_with: "Draft ..." do
 					|	Draft
 					i class="general foundicon-plus"
