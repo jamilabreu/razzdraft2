@@ -33,7 +33,7 @@ class BaseballController < ApplicationController
                   end
                   # Calculate New Team Average / OBP
                   @average = (@team.hits.to_f/@team.at_bats)
-                  @obp = (@team.times_on_base.to_f/(@team.times_on_base - @team.hits + @team.at_bats))
+                  @obp = (@team.times_on_base.to_f/@team.plate_appearances)
                   @team.update_attributes!(average: @average, obp: @obp)
                   redirect_to root_path(league_type: params[:league_type])
               end
@@ -47,7 +47,7 @@ class BaseballController < ApplicationController
                 end
                 # Calculate New Team Average / OBP
                 @average = (@team.hits.to_f/@team.at_bats)
-                @obp = (@team.times_on_base.to_f/(@team.times_on_base - @team.hits + @team.at_bats))
+                @obp = (@team.times_on_base.to_f/@team.plate_appearances)
                 @team.update_attributes!(average: @average, obp: @obp)
                 redirect_to root_path(league_type: params[:league_type])
             end
@@ -61,7 +61,7 @@ class BaseballController < ApplicationController
             end
             # Calculate New Team Average / OBP
             @average = (@team.hits.to_f/@team.at_bats)
-            @obp = (@team.times_on_base.to_f/(@team.times_on_base - @team.hits + @team.at_bats))
+            @obp = (@team.times_on_base.to_f/@team.plate_appearances)
             @team.update_attributes!(average: @average, obp: @obp)
             redirect_to root_path(league_type: params[:league_type])
           end
@@ -84,7 +84,7 @@ class BaseballController < ApplicationController
                 end
                 # Calculate New Team Average / OBP
                 @average = (@team.hits.to_f/@team.at_bats)
-                @obp = (@team.times_on_base.to_f/(@team.times_on_base - @team.hits + @team.at_bats))
+                @obp = (@team.times_on_base.to_f/@team.plate_appearances)
                 @team.update_attributes!(average: @average, obp: @obp)
                 redirect_to root_path(league_type: params[:league_type])
               end
@@ -98,7 +98,7 @@ class BaseballController < ApplicationController
                 end
                 # Calculate New Team Average / OBP
                 @average = (@team.hits.to_f/@team.at_bats)
-                @obp = (@team.times_on_base.to_f/(@team.times_on_base - @team.hits + @team.at_bats))
+                @obp = (@team.times_on_base.to_f/@team.plate_appearances)
                 @team.update_attributes!(average: @average, obp: @obp)
                 redirect_to root_path(league_type: params[:league_type])
             end
@@ -112,7 +112,7 @@ class BaseballController < ApplicationController
               end
               # Calculate New Team Average / OBP
               @average = (@team.hits.to_f/@team.at_bats)
-              @obp = (@team.times_on_base.to_f/(@team.times_on_base - @team.hits + @team.at_bats))
+              @obp = (@team.times_on_base.to_f/@team.plate_appearances)
               @team.update_attributes!(average: @average, obp: @obp)
               redirect_to root_path(league_type: params[:league_type])
           end
@@ -132,7 +132,7 @@ class BaseballController < ApplicationController
               end
               # Calculate New Team Average / OBP
               @average = (@team.hits.to_f/@team.at_bats)
-              @obp = (@team.times_on_base.to_f/(@team.times_on_base - @team.hits + @team.at_bats))
+              @obp = (@team.times_on_base.to_f/@team.plate_appearances)
               @team.update_attributes!(average: @average, obp: @obp)
               redirect_to root_path(league_type: params[:league_type])
             end
@@ -146,7 +146,7 @@ class BaseballController < ApplicationController
               end
               # Calculate New Team Average / OBP
               @average = (@team.hits.to_f/@team.at_bats)
-              @obp = (@team.times_on_base.to_f/(@team.times_on_base - @team.hits + @team.at_bats))
+              @obp = (@team.times_on_base.to_f/@team.plate_appearances)
               @team.update_attributes!(average: @average, obp: @obp)
               redirect_to root_path(league_type: params[:league_type])
           end
@@ -198,7 +198,7 @@ class BaseballController < ApplicationController
         end
         # Calculate New Team Average / OBP
         @average = (@team.hits.to_f/@team.at_bats)
-        @obp = (@team.times_on_base.to_f/(@team.times_on_base - @team.hits + @team.at_bats))
+        @obp = (@team.times_on_base.to_f/@team.plate_appearances)
         @team.update_attributes!(average: @average, obp: @obp)
       else
         # Add Stats
@@ -231,7 +231,7 @@ class BaseballController < ApplicationController
       end
       # Calculate New Team Average / OBP
       @average = (@team.hits.to_f/@team.at_bats)
-      @obp = (@team.times_on_base.to_f/(@team.times_on_base - @team.hits + @team.at_bats))
+      @obp = (@team.times_on_base.to_f/@team.plate_appearances)
       @team.update_attributes!(average: @average.nan? ? 0 : @average, obp: @obp.nan? ? 0 : @obp)
     else
       # Add Stats
