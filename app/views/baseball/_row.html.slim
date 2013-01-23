@@ -52,10 +52,12 @@ tr id="#{projection.id}"
 	td.projection class="#{impact(projection.saves,30,20,10)}"= projection.saves
 	td.actions-taken
 		- if removed
-			= link_to restore_player_path(projection), class: "" do
-				i class="general foundicon-plus"
+			span.has-tip.tip-top data-width="210" title="Mark player as free agent"
+				= link_to restore_player_path(projection), class: "" do
+					i class="general foundicon-plus"
 		- else
-			= link_to remove_player_path(projection), class: "" do
-				i class="general foundicon-remove"
+			span.has-tip.tip-top data-width="210" title="Mark player as taken"
+				= link_to remove_player_path(projection), remote: true do
+					i class="general foundicon-remove"
 
 /root_path(projection.positions.first.to_sym => params[projection.positions.first.to_sym] ? params[projection.positions.first.to_sym] + [projection] : [projection])

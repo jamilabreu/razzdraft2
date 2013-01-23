@@ -1,0 +1,4 @@
+$('#<%= @projection.id %>').remove();
+$('.alert-box').remove();
+$('#navigation').append('<%= j render "layouts/flash", alert: @message %>');
+$('.alert-box').hide().slideToggle().delay(1500).slideToggle();

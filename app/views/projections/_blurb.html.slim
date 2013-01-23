@@ -1,9 +1,4 @@
 tr id="#{projection.id}-blurb"
 	td.blurb colspan="16"
 		i class="social foundicon-torso"
-		= truncate(projection.blurb.try(:html_safe), length: 175)
-		.blurb-premium
-			| &nbsp; Check out #{link_to "RazzDraft Premium", ""} for access to full player blurbs!
-		/ .blurb-ad
-		/ 	a href="#" class="th" style="margin: 0 auto;"
-		/ 		img src="http://placehold.it/728x90"
+		= projection.blurb.try(:html_safe)

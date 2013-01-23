@@ -83,14 +83,34 @@ table thead tr th
 		color: #333
 		display: block
 
+table thead tr th:first-child
+	border-left: 1px solid #EAEAEA
+	@include border-radius(6px 0 0 0)
+
+table thead tr th:last-child
+	border-right: 1px solid #EAEAEA
+	@include border-radius(0 6px 0 0)
+
 table thead tr th.selected
 	background: #2ba6cb url("arrow.png") no-repeat right
 	border: 1px solid #1e728c
 	a
 		color: #FFF
 
+table tbody tr td:first-child
+	border-left: 1px solid #EAEAEA
+
+table tbody tr td:last-child
+	border-right: 1px solid #EAEAEA
+
 table tbody tr:last-child td
 	border-bottom: 1px solid #EAEAEA
+
+table tbody tr:last-child td:first-child
+	@include border-radius(0 0 0 6px)
+
+table tbody tr:last-child td:last-child
+	@include border-radius(0 0 6px 0)
 
 table tbody tr.total td
 	background: #FF0
@@ -181,7 +201,7 @@ table tbody tr td.actions-draft
 
 table tbody tr td.actions-taken
 	width: 1%
-	min-width: 20px
+	min-width: 30px
 	a
 		color: #AAA
 		display: block

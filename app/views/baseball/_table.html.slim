@@ -35,7 +35,6 @@
 						th class="#{header_class(:saves)}" data-sort="saves" data-direction="desc"
 							= link_to "SV", header_path(:saves, :desc), remote: true, disable_with: "..."
 						th
-						th
 				tbody
 					= render partial: "baseball/row", collection: collection, as: :projection, locals: { removed: removed }
 .three.columns

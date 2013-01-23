@@ -12,11 +12,11 @@
 			= link_to espn_league_path, class: "radius button" do
 				i.general.foundicon-plus style="margin: 0 5px 0 0"
 				| ESPN Standard League
-			= link_to "#", class: "radius success button" do
-				i.general.foundicon-plus style="margin: 0 5px 0 0"
-				| Custom League
-			.panel-premium
-				| Try out #{link_to "RazzDraft Premium", ""} for custom league types, more projections, Average Draft Position, and full player blurbs from Grey himself!
+			/ = link_to "#", class: "radius success button" do
+			/ 	i.general.foundicon-plus style="margin: 0 5px 0 0"
+			/ 	| Custom League
+			/ .panel-premium
+			/ 	| Try out #{link_to "RazzDraft Premium", ""} for custom league types, more projections, Average Draft Position, and full player blurbs from Grey himself!
 
 			/ = form_for current_user.build_baseball_team do |f|
 			/ 	- @positions_hash.each do |field, label|
@@ -38,7 +38,7 @@
 	.twelve.columns
 		.panel
 			h4 Welcome to Razzdraft!
-			p A customizable, self-updating war-room with instant access to Razzball projections.
+			p An online war-room with instant access to Razzball projections and player blurbs from Grey himself.
 			= link_to new_user_registration_path, class: "radius success button" do
 				i.general.foundicon-plus style="margin: 0 5px 0 0"
 				| Create New User

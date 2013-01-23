@@ -1,6 +1,6 @@
 .row
 	.twelve.columns
-		.fixed
+		.fixed id="navigation"
 			nav.top-bar
 				ul
 					li.name
@@ -19,9 +19,13 @@
 						- if user_signed_in?
 							/ li= link_to "Roster", "#"
 							li class="#{ current_page?(root_path) ? 'active' : nil }"
-								= link_to "Free Agents", root_path
+								= link_to root_path do
+									i class="social foundicon-torso" style="margin-right: 10px; line-height: 10px; position: relative; top: 1px;"
+									| Free Agents
 							li class="#{ current_page?(removed_players_path) ? 'active' : nil }"
-								= link_to "Taken Players", removed_players_path
+								= link_to removed_players_path do
+									i class="general foundicon-remove" style="margin-right: 5px; line-height: 10px; position: relative; top: 2px;"
+									| Taken Players
 							li.has-dropdown
 								= link_to "#" do
 									i class="general foundicon-settings"

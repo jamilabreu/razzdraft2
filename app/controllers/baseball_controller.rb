@@ -3,6 +3,12 @@ class BaseballController < ApplicationController
   def search
   	@projections = BaseballProjection.where(name: /#{params[:query]}/i)
     @league_type = params[:league_type]
+
+    if current_user.try(:baseball_team)
+      drafted_ids = current_user.baseball_team.baseball_projection_ids || []
+      removed_ids = current_user.baseball_team.removed || []
+      @projections = @projections.not_in(id: drafted_ids + removed_ids)
+    end
   end
 
   def draft_player
@@ -250,7 +256,8 @@ class BaseballController < ApplicationController
     @team = BaseballTeam.find_or_create_by(user_id: current_user.id)
     @projection = BaseballProjection.find(params[:id])
     @team.add_to_set(:removed, @projection.id)
-    redirect_to root_path(league_type: params[:league_type])
+    @message = @projection.name + " is no longer a free agent."
+    # redirect_to root_path(league_type: params[:league_type])
   end
 
   def restore_player
@@ -262,5 +269,7 @@ class BaseballController < ApplicationController
 
   def removed_players
     @removed = BaseballProjection.any_in(id: current_user.baseball_team.removed)
+    @team = BaseballTeam.where(user_id: current_user.id).first if user_signed_in?
+    @league_type = params[:league_type] ? params[:league_type] : @team.present? ? @team.league_type : "yahoo"
   end
 end

@@ -1,7 +1,19 @@
 .twelve.columns
 	.panel
-		h4 Welcome to RazzDraft!
-		p Keep tabs on your team stats, Razzball projections, and player blurbs.
+		p This tab helps you edit players marked as taken from the free agent pool.
 
 #removed_players
-	= render partial: "baseball/table", locals: { collection: @removed, removed: true }
+	- if @removed.present?
+		= render partial: "baseball/table", locals: { collection: @removed, removed: true }
+	- else
+		.twelve
+			.nine.columns
+				div style="text-align: center; font-weight: 700; color: #ff0000"
+					| No players marked as taken yet.
+			.three.columns
+				- 2.times do
+					a.show-for-medium href="#" class="th" style="margin-bottom: 15px"
+						img src="http://placehold.it/160x600" style="margin: 0 auto"
+				- 2.times do
+					a.hide-for-medium-down href="#" class="th" style="margin-bottom: 15px"
+						img src="http://placehold.it/300x250" style="margin: 0 auto"
