@@ -1,13 +1,12 @@
 .three.columns.centered
-	h2 Sign up
-	p Please sign up to start drafting a team
-	= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-	  = devise_error_messages!
-	  div
-	    = f.label :email
-	    = f.email_field :email, :autofocus => true
-	  div
-	    = f.label :password
-	    = f.password_field :password
-	  div= f.submit "Sign up"
-	= render "devise/shared/links"
+	.signup
+		= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+		  = devise_error_messages!
+		  div
+		    = f.label :email
+		    = f.email_field :email, :autofocus => true
+		  div
+		    = f.label :password
+		    = f.password_field :password
+		  div= f.submit "Sign Up", class: "radius button", style: "width: 100%"
+		= render "devise/shared/links"

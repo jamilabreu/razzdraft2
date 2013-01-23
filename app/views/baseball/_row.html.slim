@@ -25,13 +25,15 @@ tr id="#{projection.id}"
 					|	Draft
 					i class="general foundicon-plus"
 			- elsif user_signed_in?
-				= link_to "#", class:"small button draft", disabled: true do
-					|	Draft
-					i class="general foundicon-plus"
+				span.has-tip.tip-top data-width="210" title="Please select a league type."
+					= link_to "#", class:"small button draft", disabled: true do
+						|	Draft
+						i class="general foundicon-plus"
 			- else
-				= link_to new_user_registration_path, class:"small button draft", disable_with: "Draft ..." do
-					|	Draft
-					i class="general foundicon-plus"
+				span.has-tip.tip-top data-width="210" title="Please sign in to start drafting."
+					= link_to new_user_registration_path, class:"small button draft", disable_with: "Draft ..." do
+						|	Draft
+						i class="general foundicon-plus"
 	td.player_name
 		= link_to show_blurb_path(projection), remote: true do
 			i class="general foundicon-add-doc"
@@ -51,13 +53,17 @@ tr id="#{projection.id}"
 	td.projection class="#{impact_inverse(projection.whip,1.10,1.20,1.30)}"= projection.whip_f
 	td.projection class="#{impact(projection.saves,30,20,10)}"= projection.saves
 	td.actions-taken
-		- if removed
-			span.has-tip.tip-top data-width="210" title="Mark player as free agent"
-				= link_to restore_player_path(projection), class: "" do
-					i class="general foundicon-plus"
+		- if user_signed_in? && BaseballTeam.where(user_id: current_user.id).first.present?
+			- if removed
+				span.has-tip.tip-top data-width="210" title="Mark player as free agent"
+					= link_to restore_player_path(projection), class: "" do
+						i class="general foundicon-plus"
+			- else
+				span.has-tip.tip-top data-width="210" title="Mark player as taken"
+					= link_to remove_player_path(projection), remote: true do
+						i class="general foundicon-remove"
 		- else
-			span.has-tip.tip-top data-width="210" title="Mark player as taken"
-				= link_to remove_player_path(projection), remote: true do
+			span.has-tip.tip-top data-width="210" title="Please sign in to start drafting."
+				= link_to "#" do
 					i class="general foundicon-remove"
-
 /root_path(projection.positions.first.to_sym => params[projection.positions.first.to_sym] ? params[projection.positions.first.to_sym] + [projection] : [projection])

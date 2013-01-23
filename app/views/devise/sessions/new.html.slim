@@ -1,12 +1,11 @@
 .three.columns.centered
-  h2 Login
-  p Welcome back!
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-    div
-      = f.label :email
-      = f.email_field :email, :autofocus => true
-    div
-      = f.label :password
-      = f.password_field :password
-    div= f.submit "Sign in"
-  = render "devise/shared/links"
+  .signup
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      div
+        = f.label :email
+        = f.email_field :email, :autofocus => true
+      div
+        = f.label :password
+        = f.password_field :password
+      div= f.submit "Sign In", class: "radius button", style: "width: 100%"
+    = render "devise/shared/links"

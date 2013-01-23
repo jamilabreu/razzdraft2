@@ -257,6 +257,7 @@ class BaseballController < ApplicationController
     @projection = BaseballProjection.find(params[:id])
     @team.add_to_set(:removed, @projection.id)
     @message = @projection.name + " is no longer a free agent."
+    redirect_to root_path(league_type: params[:league_type]), notice: @message
     # redirect_to root_path(league_type: params[:league_type])
   end
 
@@ -264,12 +265,14 @@ class BaseballController < ApplicationController
     @team = BaseballTeam.find_or_create_by(user_id: current_user.id)
     @projection = BaseballProjection.find(params[:id])
     @team.pull(:removed, @projection.id)
-    redirect_to root_path(league_type: params[:league_type])
+    redirect_to root_path(league_type: params[:league_type]), notice: @projection.name + " is now a free agent."
   end
 
   def removed_players
-    @removed = BaseballProjection.any_in(id: current_user.baseball_team.removed)
-    @team = BaseballTeam.where(user_id: current_user.id).first if user_signed_in?
-    @league_type = params[:league_type] ? params[:league_type] : @team.present? ? @team.league_type : "yahoo"
+    if current_user.try(:baseball_team)
+      @removed = BaseballProjection.any_in(id: current_user.baseball_team.removed)
+      @team = BaseballTeam.where(user_id: current_user.id).first if user_signed_in?
+      @league_type = params[:league_type] ? params[:league_type] : @team.present? ? @team.league_type : "yahoo"
+    end
   end
 end

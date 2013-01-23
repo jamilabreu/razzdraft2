@@ -5,13 +5,14 @@
 - elsif user_signed_in?
 	.twelve.columns
 		.panel.group
-			p style="float: left; padding: 7px 15px 0 0" Select one :
+			p style="float: left; padding: 8px 15px 0 0" Select one :
 			= link_to yahoo_league_path, class: "radius button" do
 				i.general.foundicon-plus style="margin: 0 5px 0 0"
 				| Yahoo Standard League
 			= link_to espn_league_path, class: "radius button" do
 				i.general.foundicon-plus style="margin: 0 5px 0 0"
 				| ESPN Standard League
+
 			/ = link_to "#", class: "radius success button" do
 			/ 	i.general.foundicon-plus style="margin: 0 5px 0 0"
 			/ 	| Custom League
@@ -38,11 +39,12 @@
 	.twelve.columns
 		.panel
 			h4 Welcome to Razzdraft!
-			p An online war-room with instant access to Razzball projections and player blurbs from Grey himself.
+			p style="margin-bottom: 17px" An online war-room with instant access to Razzball projections and player blurbs from Grey himself.
 			= link_to new_user_registration_path, class: "radius success button" do
-				i.general.foundicon-plus style="margin: 0 5px 0 0"
+				i.general.foundicon-plus style="margin: 0 8px 0 0"
 				| Create New User
 			= link_to new_user_session_path, class: "radius button" do
+				i.social.foundicon-torso style="margin: 0 8px 0 0"
 				| Login Existing User
 
 
