@@ -11,6 +11,7 @@
 					th RBI
 					th SB
 					th AVG
+					th OBP
 			tbody
 				- @hitters_hash.each do |variable, position|
 					- p = current_user.baseball_team.send("#{position}".to_sym)
@@ -28,6 +29,7 @@
 								td= projection.rbi
 								td= projection.steals
 								td= projection.average_f
+								td= projection.obp_f
 
 						- (current_user.baseball_team.send("#{variable}_max".to_sym).to_i - p.length).times do
 							tr
@@ -39,11 +41,13 @@
 								td
 								td
 								td
+								td
 					- else
 						- current_user.baseball_team.send("#{variable}_max".to_sym).to_i.times do
 							tr
 								td
 								td= position
+								td
 								td
 								td
 								td
@@ -66,6 +70,7 @@
 								td= projection.rbi
 								td= projection.steals
 								td= projection.average_f
+								td= projection.obp_f
 				tr.total
 					td
 					td Total
@@ -75,6 +80,7 @@
 					td= current_user.baseball_team.rbi
 					td= current_user.baseball_team.steals
 					td= current_user.baseball_team.average_f
+					td= current_user.baseball_team.obp_f
 
 	.six.columns style="padding-left: 8px"
 		table.right_table

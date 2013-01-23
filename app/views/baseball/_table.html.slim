@@ -20,6 +20,8 @@
 							= link_to "SB", header_path(:steals, :desc), remote: true, disable_with: "..."
 						th class="#{header_class(:average)}" data-sort="average" data-direction="desc"
 							= link_to "AVG", header_path(:average, :desc), remote: true, disable_with: "..."
+						th class="#{header_class(:obp)}" data-sort="obp" data-direction="desc"
+							= link_to "OBP", header_path(:obp, :desc), remote: true, disable_with: "..."
 						th class="#{header_class(:wins)}" data-sort="wins" data-direction="desc"
 							= link_to "W", header_path(:wins, :desc), remote: true, disable_with: "..."
 						th class="#{header_class(:losses)}" data-sort="losses" data-direction="asc"

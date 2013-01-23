@@ -7,8 +7,9 @@ jQuery ->
 
 	$('#player_search').on 'keyup', () ->
 		query = $('#player_search').val()
+		league_type = $('#player_search').data('league-type')
 		$.ajax({
-			url: "/baseball/search",
+			url: "/baseball/search?league_type=" + league_type,
 			data:
 				query: query
 		})
@@ -17,12 +18,13 @@ jQuery ->
 
 	$('#position_search').on 'change', () ->
 		position = $('#position_search').val()
+		league_type = $('#position_search').data('league-type')
 		if position == "POS"
-			url = "/"
+			url = "/?league_type=" + league_type
 		else if $('.selected')[0]
-			url = "?position=" + position + "&direction=" + $('.selected').data('direction') + "&sort=" + $('.selected').data('sort')
+			url = "?league_type=" + league_type + "&position=" + position + "&direction=" + $('.selected').data('direction') + "&sort=" + $('.selected').data('sort')
 		else
-			url = "?position=" + position
+			url = "?league_type=" + league_type + "&position=" + position
 		window.location.href = url
 		# Clear Search Box
 		$('#player_search').val('')

@@ -38,7 +38,7 @@ class ProjectionsController < ApplicationController
 		# Position Filter Logic
 		if params[:position] && params[:position] != "ALL"
 			position = params[:position] == "MI" ? ["2B","SS"] : params[:position] == "CI" ? ["1B","3B"] : params[:position] == "P" ? ["SP","RP"] : params[:position] == "UTIL" ? ["C","1B","2B","3B","SS","OF","UTIL"] : params[:position].to_a
-			@available = @available.any_in(positions: position)
+			@available = @available.any_in("#{@league_type}_positions" => position)
 		end
 	end
 

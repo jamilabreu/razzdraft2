@@ -58,6 +58,9 @@ class BaseballTeam
   def average_f
     ("%0.3f" % average).sub!(/^0/, "")
   end
+  def obp_f
+    ("%0.3f" % obp).sub!(/^0/, "")
+  end
   def era_f
     "%0.2f" % era
   end
