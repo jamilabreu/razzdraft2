@@ -44,6 +44,14 @@
 				| Create New User
 			= link_to new_user_session_path, class: "radius button" do
 				| Login Existing User
+
+
+.ad.show-for-small
+	a href="#" class="th" style="margin: 0 auto 20px; width: 300px;"
+		img src="http://placehold.it/300x250"
+.ad.hide-for-small
+	a href="#" class="th" style="margin: 0 auto 20px; width: 728px;"
+		img src="http://placehold.it/728x90"
 #available_players
 	= render partial: "baseball/table", locals: { collection: @available, removed: false }
 
