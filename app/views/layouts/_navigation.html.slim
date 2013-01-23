@@ -11,6 +11,8 @@
 								input id="player_search" placeholder="Player Search" type="search"
 						li
 							= select_tag :position_search, options_for_select(["POS","C","1B","2B","SS","3B","MI","CI","OF","UTIL","P","SP","RP"], selected: params[:position])
+						li style="margin-left: 10px"
+							= select_tag :position_eligibility, options_for_select([["Position Eligibility: Yahoo", "yahoo"], ["Position Eligibility: ESPN", "espn"]], selected: @league_type)
 						li.toggle-topbar= link_to "", "#"
 				section
 					ul.right
@@ -28,7 +30,4 @@
 										li
 											= link_to "Delete Team", baseball_team_path(current_user.baseball_team.id), method: :delete
 									li= link_to "Logout", destroy_user_session_path, method: :delete
-						-	else
-							/ li= link_to "Create New User", new_user_registration_path
-							li= link_to "Login", new_user_session_path
 			= render "layouts/flash" if alert || notice

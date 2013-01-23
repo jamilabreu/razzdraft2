@@ -27,8 +27,8 @@ module ApplicationHelper
       "third_base"
     elsif abbrev == "MI"
       "middle_infielder"
-    elsif abbrev == "OF"
-      "middle_infielder"
+    elsif abbrev == "CI"
+      "corner_infielder"
     elsif abbrev == "OF"
       "outfield"
     elsif abbrev == "UTIL"
@@ -37,10 +37,8 @@ module ApplicationHelper
       "starter"
     elsif abbrev == "RP"
       "reliever"
-    elsif abbrev == "MI"
-      "middle_infielder"
-    elsif abbrev == "CI"
-      "corner_infielder"
+    elsif abbrev == "P"
+      "pitcher"
     end
   end
 end

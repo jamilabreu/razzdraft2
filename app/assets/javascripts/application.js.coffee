@@ -26,3 +26,8 @@ jQuery ->
 		window.location.href = url
 		# Clear Search Box
 		$('#player_search').val('')
+
+	$('#position_eligibility').on 'change', () ->
+		league_type = $('#position_eligibility').val()
+		url = "?league_type=" + league_type
+		window.location.href = url

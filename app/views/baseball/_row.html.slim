@@ -1,22 +1,31 @@
 tr id="#{projection.id}"
 	td.actions-draft
-		- if projection.positions.length > 1
-			div href="#" class="small button dropdown draft"
-				| Draft
-				ul
-					- projection.positions.each do |position|
-						li
-							- if user_signed_in?
-								= link_to position, draft_player_path(projection, position: position.strip, position_name: position_name(position.strip)), disable_with: "Draft ..."
-							- else
-								= link_to position, new_user_registration_path
+		- if projection.send("#{@league_type}_positions").length > 1
+			- if user_signed_in? && BaseballTeam.where(user_id: current_user.id).first.present?
+				div href="#" class="small button dropdown draft"
+					| Draft
+					ul
+						- projection.send("#{@league_type}_positions").each do |position|
+							li
+								- if user_signed_in?
+									= link_to position, draft_player_path(projection, position: position.strip, position_name: position_name(position.strip), league_type: @league_type), disable_with: "Draft ..."
+								- else
+									= link_to position, new_user_registration_path
+			- elsif user_signed_in?
+				= link_to "#", class:"small button draft", disabled: true do
+					|	Draft
+					i class="general foundicon-plus"
+			- else
+				= link_to new_user_registration_path, class:"small button draft", disable_with: "Draft ..." do
+					|	Draft
+					i class="general foundicon-plus"
 		- else
 			- if user_signed_in? && BaseballTeam.where(user_id: current_user.id).first.present?
-				= link_to draft_player_path(projection, position: projection.position, position_name: position_name(projection.position)), class:"small button draft", disable_with: "Draft ..." do
+				= link_to draft_player_path(projection, position: projection.send("#{@league_type}_positions").first, position_name: position_name(projection.send("#{@league_type}_positions").first), league_type: @league_type), class:"small button draft", disable_with: "Draft ..." do
 					|	Draft
 					i class="general foundicon-plus"
 			- elsif user_signed_in?
-				= link_to root_path, class:"small button draft", disable_with: "Draft ..." do
+				= link_to "#", class:"small button draft", disabled: true do
 					|	Draft
 					i class="general foundicon-plus"
 			- else
@@ -28,12 +37,12 @@ tr id="#{projection.id}"
 			i class="general foundicon-add-doc"
 			= projection.name
 	td.player_rank= projection.rank
-	td.player_positions= projection.positions.join(", ")
+	td.player_positions= projection.send("#{@league_type}_positions").join(", ")
 	td.projection class="#{impact(projection.runs,90,80,70)}"= projection.runs
 	td.projection class="#{impact(projection.homeruns,26,19,12)}"= projection.homeruns
 	td.projection class="#{impact(projection.rbi,90,80,70)}"= projection.rbi
-	td.projection class="#{impact(projection.average,0.300,0.285,0.270)}"= projection.average_f
 	td.projection class="#{impact(projection.steals,30,20,10)}"= projection.steals
+	td.projection class="#{impact(projection.average,0.300,0.285,0.270)}"= projection.average_f
 	td.projection class="#{impact(projection.wins,18,14,10)}"= projection.wins
 	td.projection class="#{impact_inverse(projection.losses,4,8,12)}"= projection.losses
 	td.projection class="#{impact(projection.strikeouts,200,180,160)}"= projection.strikeouts

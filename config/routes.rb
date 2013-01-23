@@ -3,8 +3,10 @@ Razzdraft::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   devise_for :users
   resources :users, only: [:index]
+  # Teams
+  match 'baseball_teams/yahoo_league' => 'baseball_teams#yahoo_league', as: 'yahoo_league'
+  match 'baseball_teams/espn_league' => 'baseball_teams#espn_league', as: 'espn_league'
   resources :baseball_teams
-  match 'show_blurb/:id' => 'projections#show_blurb', as: 'show_blurb'
 
   # Baseball
   match 'baseball/search' => 'baseball#search', as: 'baseball_search'
@@ -14,6 +16,9 @@ Razzdraft::Application.routes.draw do
   match 'baseball/restore_player/:id' => 'baseball#restore_player', as: 'restore_player'
   match 'baseball/removed_players' => 'baseball#removed_players', as: 'removed_players'
   match '', to: 'projections#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+
+  match 'show_blurb/:id' => 'projections#show_blurb', as: 'show_blurb'
+
   root to: "projections#index"
 
   # The priority is based upon order of creation:

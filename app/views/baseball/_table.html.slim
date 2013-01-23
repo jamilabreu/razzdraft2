@@ -16,10 +16,10 @@
 							= link_to "HR", header_path(:homeruns, :desc), remote: true, disable_with: "..."
 						th class="#{header_class(:rbi)}" data-sort="rbi" data-direction="desc"
 							= link_to "RBI", header_path(:rbi, :desc), remote: true, disable_with: "..."
-						th class="#{header_class(:average)}" data-sort="average" data-direction="desc"
-							= link_to "AVG", header_path(:average, :desc), remote: true, disable_with: "..."
 						th class="#{header_class(:steals)}" data-sort="steals" data-direction="desc"
 							= link_to "SB", header_path(:steals, :desc), remote: true, disable_with: "..."
+						th class="#{header_class(:average)}" data-sort="average" data-direction="desc"
+							= link_to "AVG", header_path(:average, :desc), remote: true, disable_with: "..."
 						th class="#{header_class(:wins)}" data-sort="wins" data-direction="desc"
 							= link_to "W", header_path(:wins, :desc), remote: true, disable_with: "..."
 						th class="#{header_class(:losses)}" data-sort="losses" data-direction="asc"
@@ -37,9 +37,9 @@
 				tbody
 					= render partial: "baseball/row", collection: collection, as: :projection, locals: { removed: removed }
 .three.columns
-	- 3.times do
+	- 2.times do
 		a.show-for-medium href="#" class="th" style="margin-bottom: 15px"
-			img src="http://placehold.it/160x450" style="margin: 0 auto"
-	- 3.times do
+			img src="http://placehold.it/160x600" style="margin: 0 auto"
+	- 2.times do
 		a.hide-for-medium-down href="#" class="th" style="margin-bottom: 15px"
 			img src="http://placehold.it/300x250" style="margin: 0 auto"

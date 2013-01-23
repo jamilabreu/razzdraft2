@@ -3,6 +3,7 @@ class BaseballTeam
   belongs_to :user
   has_many :baseball_projections
 
+  field :league_type, type: String
   field :"C", type: Array
   field :"1B", type: Array
   field :"2B", type: Array
@@ -15,8 +16,7 @@ class BaseballTeam
   field :"SP", type: Array
   field :"RP", type: Array
   field :"P", type: Array
-  field :batters, type: Integer, default: ->{ 0 }
-  field :pitchers, type: Integer, default: ->{ 0 }
+  field :"BENCH", type: Array
 
   field :catcher_max
   field :first_base_max
@@ -30,19 +30,29 @@ class BaseballTeam
   field :pitcher_max
   field :middle_infielder_max
   field :corner_infielder_max
+  field :bench_max
 
+  field :plate_appearances, type: Integer, default: ->{ 0 }
+  field :at_bats, type: Integer, default: ->{ 0 }
+  field :hits, type: Integer, default: ->{ 0 }
+  field :times_on_base, type: Integer, default: ->{ 0 }
   field :runs, type: Integer, default: ->{ 0 }
   field :homeruns, type: Integer, default: ->{ 0 }
   field :rbi, type: Integer, default: ->{ 0 }
-  field :average, type: Float, default: ->{ 0.000 }
-  field :averages, type: Array
   field :steals, type: Integer, default: ->{ 0 }
+  field :average, type: Float, default: ->{ 0.000 }
+  field :obp, type: Float, default: ->{ 0.000 }
+
+  field :innings_pitched, type: Integer, default: ->{ 0 }
+  field :earned_runs, type: Float, default: ->{ 0.000 }
+  field :basemen_allowed, type: Float, default: ->{ 0.000 }
   field :wins, type: Integer, default: ->{ 0 }
   field :losses, type: Integer, default: ->{ 0 }
   field :era, type: Float, default: ->{ 0.00 }
   field :whip, type: Float, default: ->{ 0.00 }
   field :strikeouts, type: Integer, default: ->{ 0 }
   field :saves, type: Integer, default: ->{ 0 }
+
   field :removed, type: Array
 
   def average_f

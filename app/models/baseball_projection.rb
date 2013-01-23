@@ -14,17 +14,28 @@ class BaseballProjection
   field :team, type: String
   field :team_abbreviation, type: String
   field :rank, type: Integer
+
+  field :plate_appearances, type: Integer, default: ->{ 0 }
+  field :at_bats, type: Integer, default: ->{ 0 }
+  field :hits, type: Integer, default: ->{ 0 }
+  field :times_on_base, type: Integer, default: ->{ 0 }
   field :runs, type: Integer, default: ->{ 0 }
   field :homeruns, type: Integer, default: ->{ 0 }
   field :rbi, type: Integer, default: ->{ 0 }
-  field :average, type: Float, default: ->{ 0.000 }
   field :steals, type: Integer, default: ->{ 0 }
+  field :average, type: Float, default: ->{ 0.000 }
+  field :obp, type: Float, default: ->{ 0.000 }
+
+  field :innings_pitched, type: Integer, default: ->{ 0 }
+  field :earned_runs, type: Float, default: ->{ 0.000 }
+  field :basemen_allowed, type: Float, default: ->{ 0.000 }
   field :wins, type: Integer, default: ->{ 0 }
   field :losses, type: Integer, default: ->{ 0 }
   field :era, type: Float, default: ->{ 0.00 }
   field :whip, type: Float, default: ->{ 0.00 }
   field :strikeouts, type: Integer, default: ->{ 0 }
   field :saves, type: Integer, default: ->{ 0 }
+
   field :blurb, type: String
   field :owner, type: String
   field :sport, type: String
@@ -62,8 +73,5 @@ class BaseballProjection
   end
   def whip_f
     "%0.2f" % whip
-  end
-  def position
-    positions.first
   end
 end
