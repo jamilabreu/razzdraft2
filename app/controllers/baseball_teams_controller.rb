@@ -1,9 +1,12 @@
 class BaseballTeamsController < ApplicationController
+	def new
+		@baseball_team = BaseballTeam.new
+	end
 	def create
 		@baseball_team = BaseballTeam.new(params[:baseball_team])
 		@baseball_team.user = current_user
 		@baseball_team.save
-		redirect_to root_path
+		redirect_to root_path, notice: "Team created! If you want to delete this team, click the Settings dropdown tab at the top right of your screen."
 	end
 
 	def destroy

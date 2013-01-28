@@ -33,3 +33,7 @@ jQuery ->
 		league_type = $('#position_eligibility').val()
 		url = "?league_type=" + league_type
 		window.location.href = url
+
+
+	$('#show_custom_league').on 'click', () ->
+		$('#new_baseball_team').show()

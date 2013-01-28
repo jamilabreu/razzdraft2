@@ -17,7 +17,6 @@
 				section
 					ul.right
 						- if user_signed_in?
-							/ li= link_to "Roster", "#"
 							li class="#{ current_page?(root_path) ? 'active' : nil }"
 								= link_to root_path do
 									i class="social foundicon-torso" style="margin-right: 10px; line-height: 10px; position: relative; top: 1px;"
