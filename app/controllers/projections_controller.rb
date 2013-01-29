@@ -10,11 +10,14 @@ class ProjectionsController < ApplicationController
 			"middle_infielder" => "MI",
 			"corner_infielder" => "CI",
 			"outfield" => "OF",
-			"util" => "UTIL"}
+			"util" => "UTIL"
+		}
 		@pitchers_hash = {
 			"starter" => "SP",
 			"reliever" => "RP",
-			"pitcher" => "P" }
+			"pitcher" => "P",
+			"bench" => "BENCH"
+		}
 		@positions_hash = @hitters_hash.merge(@pitchers_hash)
 
 		if current_user.try(:baseball_team)

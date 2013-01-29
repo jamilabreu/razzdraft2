@@ -1,6 +1,7 @@
-.twelve.columns
-	.alert-box.alert
-		| Draft complete!
+- if current_user.baseball_team.baseball_projections.length >= players_max
+	.twelve.columns
+		.alert-box.alert
+			| Draft complete!
 .twelve
 	.six.columns style="padding-right: 8px"
 		table.left_table

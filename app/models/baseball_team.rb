@@ -67,4 +67,7 @@ class BaseballTeam
   def whip_f
     "%0.2f" % whip
   end
+  def players_max
+    catcher_max.to_i + first_base_max.to_i + second_base_max.to_i + shortstop_max.to_i + third_base_max.to_i + outfield_max.to_i + util_max.to_i + starter_max.to_i + reliever_max.to_i + pitcher_max.to_i + middle_infielder_max.to_i + corner_infielder_max.to_i + bench_max.to_i
+  end
 end

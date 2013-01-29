@@ -22,11 +22,13 @@
 						- if ["MI","CI"].include?(label)
 							= f.select (field + "_max").to_sym, 0..2
 						- elsif ["OF"].include?(label)
-							= f.select (field + "_max").to_sym, 3..5
+							= f.select (field + "_max").to_sym, 3..6
 						- elsif ["P"].include?(label)
-							= f.select (field + "_max").to_sym, 4..9
+							= f.select (field + "_max").to_sym, 3..9
 						- elsif ["SP","RP","UTIL"].include?(label)
-							= f.select (field + "_max").to_sym, 2..4
+							= f.select (field + "_max").to_sym, 0..4
+						- elsif ["BENCH"].include?(label)
+							= f.select (field + "_max").to_sym, 0..9
 						- else
 							= f.select (field + "_max").to_sym, 1..2
 				div

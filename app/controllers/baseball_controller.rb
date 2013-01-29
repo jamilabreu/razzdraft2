@@ -17,17 +17,17 @@ class BaseballController < ApplicationController
     @league_type = @team.league_type
 
     # If Position Full
-    if @team && @team.send(params[:position].to_s).present? && (@team.send(params[:position].to_s).length >= @team.send("#{params[:position_name]}_max".to_sym).to_i)
+    if @team.send("#{params[:position_name]}_max".to_sym).to_i == 0 || (@team.send(params[:position].to_s).present? && @team.send(params[:position].to_s).length >= @team.send("#{params[:position_name]}_max".to_sym).to_i)
       # If Batter
       if (@projection.send("#{@league_type}_positions") & ["SP","RP"]).empty?
         # If MI
         if params[:position] == "2B" || params[:position] == "SS"
           # If MI Full
-          if @team.send(:"MI").present? && (@team.send(:"MI").length >= @team.send(:middle_infielder_max).to_i)
+          if @team.send(:middle_infielder_max).to_i == 0 || (@team.send(:"MI").present? && (@team.send(:"MI").length >= @team.send(:middle_infielder_max).to_i))
             # If UTIL Full
-            if @team.send(:"UTIL").present? && (@team.send(:"UTIL").length >= @team.send(:util_max).to_i)
+            if @team.send(:util_max).to_i == 0 || (@team.send(:"UTIL").present? && (@team.send(:"UTIL").length >= @team.send(:util_max).to_i))
               # If BENCH Full
-              if @team.send(:"BENCH").present? && (@team.send(:"BENCH").length >= @team.send(:bench_max).to_i)
+              if @team.send(:bench_max).to_i == 0 || (@team.send(:"BENCH").present? && (@team.send(:"BENCH").length >= @team.send(:bench_max).to_i))
                 redirect_to root_path(league_type: params[:league_type]), notice: "All slots for #{params[:position]} are full. Please remove a player to add #{@projection.name}."
               else
                 # Add as BENCH
@@ -74,11 +74,11 @@ class BaseballController < ApplicationController
         # IF CI
         elsif params[:position] == "1B" || params[:position] == "3B"
          # If CI Full
-          if @team.send(:"CI").present? && (@team.send(:"CI").length >= @team.send(:corner_infielder_max).to_i)
+          if @team.send(:corner_infielder_max).to_i == 0 || (@team.send(:"CI").present? && (@team.send(:"CI").length >= @team.send(:corner_infielder_max).to_i))
             # If UTIL Full
-            if @team.send(:"UTIL").present? && (@team.send(:"UTIL").length >= @team.send(:util_max).to_i)
+            if @team.send(:util_max).to_i == 0 || (@team.send(:"UTIL").present? && (@team.send(:"UTIL").length >= @team.send(:util_max).to_i))
               # If BENCH Full
-              if @team.send(:"BENCH").present? && (@team.send(:"BENCH").length >= @team.send(:bench_max).to_i)
+              if @team.send(:bench_max).to_i == 0 || (@team.send(:"BENCH").present? && (@team.send(:"BENCH").length >= @team.send(:bench_max).to_i))
                 redirect_to root_path(league_type: params[:league_type]), notice: "All slots for #{params[:position]} are full. Please remove a player to add #{@projection.name}."
               else
                 # Add as BENCH
@@ -124,9 +124,9 @@ class BaseballController < ApplicationController
           end
         else
           # IF UTIL Full
-          if @team.send(:"UTIL").present? && (@team.send(:"UTIL").length >= @team.send(:util_max).to_i)
+          if @team.send(:util_max).to_i == 0 || (@team.send(:"UTIL").present? && (@team.send(:"UTIL").length >= @team.send(:util_max).to_i))
             # If BENCH Full
-            if @team.send(:"BENCH").present? && (@team.send(:"BENCH").length >= @team.send(:bench_max).to_i)
+            if @team.send(:bench_max).to_i == 0 || (@team.send(:"BENCH").present? && (@team.send(:"BENCH").length >= @team.send(:bench_max).to_i))
               redirect_to root_path(league_type: params[:league_type]), notice: "All slots for #{params[:position]} are full. Please remove a player to add #{@projection.name}."
             else
               # Add as BENCH
@@ -160,9 +160,9 @@ class BaseballController < ApplicationController
       # If Pitcher
       else
         # Check P Availability
-        if @team.send(:"P").present? && (@team.send(:"P").length >= @team.send(:pitcher_max).to_i)
+        if @team.send(:pitcher_max).to_i == 0 || (@team.send(:"P").present? && (@team.send(:"P").length >= @team.send(:pitcher_max).to_i))
           # If BENCH Full
-          if @team.send(:"BENCH").present? && (@team.send(:"BENCH").length >= @team.send(:bench_max).to_i)
+          if @team.send(:bench_max).to_i == 0 || (@team.send(:"BENCH").present? && (@team.send(:"BENCH").length >= @team.send(:bench_max).to_i))
             redirect_to root_path(league_type: params[:league_type]), notice: "All slots for #{params[:position]} are full. Please remove a player to add #{@projection.name}."
           else
             # Add as BENCH
