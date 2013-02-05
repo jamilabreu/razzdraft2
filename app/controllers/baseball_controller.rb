@@ -194,7 +194,7 @@ class BaseballController < ApplicationController
     @league_type = @team.league_type
 
     # If on BENCH
-    if @team.send(:"BENCH").include?(@projection.id)
+    if @team.send(:"BENCH").present? && @team.send(:"BENCH").include?(@projection.id)
       @team.baseball_projections.delete(@projection)
       @team.pull(:"BENCH", @projection.id)
     else

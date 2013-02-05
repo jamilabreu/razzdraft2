@@ -120,7 +120,7 @@ class BaseballTeam
   end
   def percent_goal(stat)
     if stat == :era || stat == :whip
-      percentage = self.goal(stat) / self.send(stat).to_f
+      percentage = self.send(stat) == 0 ? 0 : self.goal(stat) / self.send(stat)
     else
       percentage = self.send(stat).to_f / self.goal(stat)
     end
