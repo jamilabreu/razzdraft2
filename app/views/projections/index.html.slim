@@ -5,16 +5,16 @@
 - elsif user_signed_in?
 	.twelve.columns
 		.panel.group
-			p style="float: left; padding: 8px 15px 0 0" Select one :
-			= link_to yahoo_league_path, class: "radius button" do
-				i.general.foundicon-plus style="margin: 0 5px 0 0"
-				| Yahoo Standard League
-			= link_to espn_league_path, class: "radius button" do
-				i.general.foundicon-plus style="margin: 0 5px 0 0"
-				| ESPN Standard League
-			= link_to "#", class: "radius success button", id: "show_custom_league" do
-				i.general.foundicon-plus style="margin: 0 5px 0 0"
-				| Custom League
+			p style="padding: 8px 0 0 20px" Create Your League:
+			/ = link_to yahoo_league_path, class: "radius button" do
+			/ 	i.general.foundicon-plus style="margin: 0 5px 0 0"
+			/ 	| Yahoo Standard League
+			/ = link_to espn_league_path, class: "radius button" do
+			/ 	i.general.foundicon-plus style="margin: 0 5px 0 0"
+			/ 	| ESPN Standard League
+			/ = link_to "#", class: "radius success button", id: "show_custom_league" do
+			/ 	i.general.foundicon-plus style="margin: 0 5px 0 0"
+			/ 	| Custom League
 			= form_for current_user.build_baseball_team do |f|
 				- @positions_hash.each do |field, label|
 					div.group
@@ -34,8 +34,11 @@
 				div
 					= f.label :league_type, "LEAGUE"
 					= f.select :league_type, [["Yahoo", "yahoo"], ["ESPN", "espn"]]
+				div
+					= f.label :league_size, "TEAMS"
+					= f.select :league_size, [10,12,14,15,16]
 				div style="clear: left; margin-top: 15px"
-					= f.submit "Create Custom League", class: "radius success button"
+					= f.submit "Create League", class: "radius success button"
 - else
 	.twelve.columns
 		.panel

@@ -12,7 +12,7 @@
 						li
 							= select_tag :position_search, options_for_select(["POS","C","1B","2B","SS","3B","MI","CI","OF","UTIL","P","SP","RP"], selected: params[:position]), {"data-league-type" => @league_type}
 						li style="margin-left: 10px"
-							= select_tag :position_eligibility, options_for_select([["Position Eligibility: Yahoo", "yahoo"], ["Position Eligibility: ESPN", "espn"]], selected: @league_type)
+							= select_tag :position_eligibility, options_for_select([["League Type: Yahoo", "yahoo"], ["League Type: ESPN", "espn"]], selected: @league_type)
 						li.toggle-topbar= link_to "", "#"
 				section
 					ul.right

@@ -1,4 +1,4 @@
-- if current_user.baseball_team.baseball_projections.length >= players_max
+- if current_user.try(:baseball_team) && (current_user.baseball_team.baseball_projections.length >= current_user.baseball_team.players_max)
 	.twelve.columns
 		.alert-box.alert
 			| Draft complete!
@@ -15,7 +15,7 @@
 					th RBI
 					th SB
 					th AVG
-					th OBP
+					/ th OBP
 			tbody
 				- @hitters_hash.each do |variable, position|
 					- p = current_user.baseball_team.send("#{position}".to_sym)
@@ -33,7 +33,7 @@
 								td= projection.rbi
 								td= projection.steals
 								td= projection.average_f
-								td= projection.obp_f
+								/ td= projection.obp_f
 
 						- (current_user.baseball_team.send("#{variable}_max".to_sym).to_i - p.length).times do
 							tr
@@ -45,7 +45,7 @@
 								td
 								td
 								td
-								td
+								/ td
 					- else
 						- current_user.baseball_team.send("#{variable}_max".to_sym).to_i.times do
 							tr
@@ -57,7 +57,7 @@
 								td
 								td
 								td
-								td
+								/ td
 				- if current_user.baseball_team.send(:"BENCH").present?
 					- current_user.baseball_team.send(:"BENCH").each do |id|
 						- projection = BaseballProjection.find(id)
@@ -74,7 +74,7 @@
 								td= projection.rbi
 								td= projection.steals
 								td= projection.average_f
-								td= projection.obp_f
+								/ td= projection.obp_f
 				tr.total
 					td
 					td Total
@@ -84,8 +84,27 @@
 					td= current_user.baseball_team.rbi
 					td= current_user.baseball_team.steals
 					td= current_user.baseball_team.average_f
-					td= current_user.baseball_team.obp_f
-
+					/ td= current_user.baseball_team.obp_f
+				tr.goal
+					td
+					td Goal
+					td
+					td= current_user.baseball_team.goal(:runs)
+					td= current_user.baseball_team.goal(:homeruns)
+					td= current_user.baseball_team.goal(:rbi)
+					td= current_user.baseball_team.goal(:steals)
+					td= ("%0.3f" % current_user.baseball_team.goal(:average)).sub!(/^0/, "")
+					/ td
+				tr.precent_goal
+					td
+					td % Goal
+					td
+					td= current_user.baseball_team.percent_goal(:runs)
+					td= current_user.baseball_team.percent_goal(:homeruns)
+					td= current_user.baseball_team.percent_goal(:rbi)
+					td= current_user.baseball_team.percent_goal(:steals)
+					td= current_user.baseball_team.percent_goal(:average)
+					/ td
 	.six.columns style="padding-left: 8px"
 		table.right_table
 			thead
@@ -94,7 +113,7 @@
 					th POS
 					th
 					th W
-					th L
+					/ th L
 					th K
 					th ERA
 					th WHIP
@@ -112,7 +131,7 @@
 								td= position
 								td= projection.name
 								td= projection.wins
-								td= projection.losses
+								/ td= projection.losses
 								td= projection.strikeouts
 								td= projection.era_f
 								td= projection.whip_f
@@ -123,7 +142,7 @@
 								td= position
 								td
 								td
-								td
+								/ td
 								td
 								td
 								td
@@ -135,7 +154,7 @@
 								td= position
 								td
 								td
-								td
+								/ td
 								td
 								td
 								td
@@ -152,7 +171,7 @@
 								td BENCH
 								td= projection.name
 								td= projection.wins
-								td= projection.losses
+								/ td= projection.losses
 								td= projection.strikeouts
 								td= projection.era_f
 								td= projection.whip_f
@@ -162,8 +181,28 @@
 					td Total
 					td
 					td= current_user.baseball_team.wins
-					td= current_user.baseball_team.losses
+					/ td= current_user.baseball_team.losses
 					td= current_user.baseball_team.strikeouts
 					td= current_user.baseball_team.era_f
 					td= current_user.baseball_team.whip_f
 					td= current_user.baseball_team.saves
+				tr.goal
+					td
+					td Goal
+					td
+					td= current_user.baseball_team.goal(:wins)
+					/ td
+					td= current_user.baseball_team.goal(:strikeouts)
+					td= current_user.baseball_team.goal(:era)
+					td= current_user.baseball_team.goal(:whip)
+					td= current_user.baseball_team.goal(:saves)
+				tr.percent
+					td
+					td % Goal
+					td
+					td= current_user.baseball_team.percent_goal(:wins)
+					/ td
+					td= current_user.baseball_team.percent_goal(:strikeouts)
+					td= current_user.baseball_team.percent_goal(:era)
+					td= current_user.baseball_team.percent_goal(:whip)
+					td= current_user.baseball_team.percent_goal(:saves)

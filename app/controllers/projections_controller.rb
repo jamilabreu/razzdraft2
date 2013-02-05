@@ -2,6 +2,7 @@ class ProjectionsController < ApplicationController
 	def index
 		@team = BaseballTeam.where(user_id: current_user.id).first if user_signed_in?
 		@league_type = params[:league_type] ? params[:league_type] : @team.present? ? @team.league_type : "yahoo"
+		@league_size = @team.present? ? @team.league_size : 10
 		@hitters_hash = { "catcher" => "C",
 			"first_base" => "1B",
 			"second_base" => "2B",
@@ -15,8 +16,7 @@ class ProjectionsController < ApplicationController
 		@pitchers_hash = {
 			"starter" => "SP",
 			"reliever" => "RP",
-			"pitcher" => "P",
-			"bench" => "BENCH"
+			"pitcher" => "P"
 		}
 		@positions_hash = @hitters_hash.merge(@pitchers_hash)
 

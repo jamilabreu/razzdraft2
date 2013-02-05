@@ -33,14 +33,6 @@ class BaseballController < ApplicationController
                 # Add as BENCH
                   @team.baseball_projections << @projection
                   @team.add_to_set(:"BENCH", @projection.id)
-                  # Add Stats
-                  %w( hits at_bats plate_appearances times_on_base runs homeruns rbi steals ).each do |stat|
-                    @team.inc(stat.to_sym, @projection.send(stat.to_sym))
-                  end
-                  # Calculate New Team Average / OBP
-                  @average = (@team.hits.to_f/@team.at_bats)
-                  @obp = (@team.times_on_base.to_f/@team.plate_appearances)
-                  @team.update_attributes!(average: @average, obp: @obp)
                   redirect_to root_path(league_type: params[:league_type])
               end
             else
@@ -84,14 +76,6 @@ class BaseballController < ApplicationController
                 # Add as BENCH
                 @team.baseball_projections << @projection
                 @team.add_to_set(:"BENCH", @projection.id)
-                # Add Stats
-                %w( hits at_bats plate_appearances times_on_base runs homeruns rbi steals ).each do |stat|
-                  @team.inc(stat.to_sym, @projection.send(stat.to_sym))
-                end
-                # Calculate New Team Average / OBP
-                @average = (@team.hits.to_f/@team.at_bats)
-                @obp = (@team.times_on_base.to_f/@team.plate_appearances)
-                @team.update_attributes!(average: @average, obp: @obp)
                 redirect_to root_path(league_type: params[:league_type])
               end
             else
@@ -132,14 +116,6 @@ class BaseballController < ApplicationController
               # Add as BENCH
               @team.baseball_projections << @projection
               @team.add_to_set(:"BENCH", @projection.id)
-              # Add Stats
-              %w( hits at_bats plate_appearances times_on_base runs homeruns rbi steals ).each do |stat|
-                @team.inc(stat.to_sym, @projection.send(stat.to_sym))
-              end
-              # Calculate New Team Average / OBP
-              @average = (@team.hits.to_f/@team.at_bats)
-              @obp = (@team.times_on_base.to_f/@team.plate_appearances)
-              @team.update_attributes!(average: @average, obp: @obp)
               redirect_to root_path(league_type: params[:league_type])
             end
           else
@@ -168,14 +144,6 @@ class BaseballController < ApplicationController
             # Add as BENCH
             @team.baseball_projections << @projection
             @team.add_to_set(:"BENCH", @projection.id)
-            # Add Stats
-            %w( innings_pitched earned_runs basemen_allowed wins losses strikeouts saves ).each do |stat|
-              @team.inc(stat.to_sym, @projection.send(stat.to_sym))
-            end
-            # Calculate New Team ERA / WHIP
-            @era = (@team.earned_runs.to_f/@team.innings_pitched)*9
-            @whip = (@team.basemen_allowed.to_f/@team.innings_pitched)
-            @team.update_attributes!(era: @era, whip: @whip)
             redirect_to root_path(league_type: params[:league_type])
           end
         else
@@ -225,29 +193,34 @@ class BaseballController < ApplicationController
     @projection = BaseballProjection.find(params[:id])
     @league_type = @team.league_type
 
-    @team.baseball_projections.delete(@projection)
-
-    %w( 1B 2B SS 3B MI CI OF UTIL SP RP P BENCH ).each do |position|
-      @team.pull(position.to_sym, @projection.id)
-    end
-    if (@projection.send("#{@league_type}_positions") & ["SP","RP","P"]).empty?
-      # Add Stats
-      %w( hits at_bats plate_appearances times_on_base runs homeruns rbi steals ).each do |stat|
-        @team.inc(stat.to_sym, -(@projection.send(stat.to_sym)))
-      end
-      # Calculate New Team Average / OBP
-      @average = (@team.hits.to_f/@team.at_bats)
-      @obp = (@team.times_on_base.to_f/@team.plate_appearances)
-      @team.update_attributes!(average: @average.nan? ? 0 : @average, obp: @obp.nan? ? 0 : @obp)
+    # If on BENCH
+    if @team.send(:"BENCH").include?(@projection.id)
+      @team.baseball_projections.delete(@projection)
+      @team.pull(:"BENCH", @projection.id)
     else
-      # Add Stats
-      %w( innings_pitched earned_runs basemen_allowed wins losses strikeouts saves ).each do |stat|
-        @team.inc(stat.to_sym, -(@projection.send(stat.to_sym)))
+      @team.baseball_projections.delete(@projection)
+      %w( 1B 2B SS 3B MI CI OF UTIL SP RP P BENCH ).each do |position|
+        @team.pull(position.to_sym, @projection.id)
       end
-      # Calculate New Team ERA / WHIP
-      @era = (@team.earned_runs.to_f/@team.innings_pitched)*9
-      @whip = (@team.basemen_allowed.to_f/@team.innings_pitched)
-      @team.update_attributes!(era: @era.nan? ? 0 : @era, whip: @whip.nan? ? 0 : @whip)
+      if (@projection.send("#{@league_type}_positions") & ["SP","RP","P"]).empty?
+        # Add Stats
+        %w( hits at_bats plate_appearances times_on_base runs homeruns rbi steals ).each do |stat|
+          @team.inc(stat.to_sym, -(@projection.send(stat.to_sym)))
+        end
+        # Calculate New Team Average / OBP
+        @average = (@team.hits.to_f/@team.at_bats)
+        @obp = (@team.times_on_base.to_f/@team.plate_appearances)
+        @team.update_attributes!(average: @average.nan? ? 0 : @average, obp: @obp.nan? ? 0 : @obp)
+      else
+        # Add Stats
+        %w( innings_pitched earned_runs basemen_allowed wins losses strikeouts saves ).each do |stat|
+          @team.inc(stat.to_sym, -(@projection.send(stat.to_sym)))
+        end
+        # Calculate New Team ERA / WHIP
+        @era = (@team.earned_runs.to_f/@team.innings_pitched)*9
+        @whip = (@team.basemen_allowed.to_f/@team.innings_pitched)
+        @team.update_attributes!(era: @era.nan? ? 0 : @era, whip: @whip.nan? ? 0 : @whip)
+      end
     end
     redirect_to root_path(league_type: params[:league_type])
   end
