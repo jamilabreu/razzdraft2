@@ -39,8 +39,7 @@
 					= render partial: "baseball/row", collection: collection, as: :projection, locals: { removed: removed }
 .three.columns
 	- 2.times do
-		a.show-for-medium href="#" class="th" style="margin-bottom: 15px"
-			img src="http://placehold.it/160x600" style="margin: 0 auto"
-	- 2.times do
-		a.hide-for-medium-down href="#" class="th" style="margin-bottom: 15px"
-			img src="http://placehold.it/300x250" style="margin: 0 auto"
+		= render "layouts/banner2"
+	/ - 2.times do
+	/ 	a.hide-for-medium-down href="#" class="th" style="margin-bottom: 15px"
+	/ 		img src="http://placehold.it/300x250" style="margin: 0 auto"
