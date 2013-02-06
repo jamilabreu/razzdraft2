@@ -26,7 +26,7 @@
 						- elsif ["P"].include?(label)
 							= f.select (field + "_max").to_sym, 3..9
 						- elsif ["SP","RP","UTIL"].include?(label)
-							= f.select (field + "_max").to_sym, 0..4
+							= f.select (field + "_max").to_sym, 0..4, {selected: 2}
 						- elsif ["BENCH"].include?(label)
 							= f.select (field + "_max").to_sym, 0..9
 						- else
@@ -36,7 +36,7 @@
 					= f.select :league_type, [["Yahoo", "yahoo"], ["ESPN", "espn"]]
 				div
 					= f.label :league_size, "TEAMS"
-					= f.select :league_size, [10,12,14,15,16]
+					= f.select :league_size, [10,12,14,15,16], {selected: 12}
 				div style="clear: left; margin-top: 15px"
 					= f.submit "Create League", class: "radius success button"
 - else
