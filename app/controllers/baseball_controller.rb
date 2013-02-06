@@ -5,8 +5,8 @@ class BaseballController < ApplicationController
     @league_type = params[:league_type]
 
     if current_user.try(:baseball_team)
-      drafted_ids = current_user.baseball_team.baseball_projection_ids || []
-      removed_ids = current_user.baseball_team.removed || []
+      drafted_ids = current_user.baseball_team.baseball_projection_ids.present? ? current_user.baseball_team.baseball_projection_ids : []
+      removed_ids = current_user.baseball_team.removed.present? ? current_user.baseball_team.removed : []
       @projections = @projections.not_in(id: drafted_ids + removed_ids)
     end
   end

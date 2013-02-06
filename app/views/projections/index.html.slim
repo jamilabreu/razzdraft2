@@ -58,6 +58,11 @@
 	/ 	img src="http://placehold.it/300x250"
 .ad.hide-for-small
 	= render "layouts/banner"
-#available_players
-	= render partial: "baseball/table", locals: { collection: @available, removed: false }
 
+.twelve
+	.nine.columns style="padding-right: 0"
+		#available_players
+			= render partial: "baseball/table", locals: { collection: @available, removed: false }
+.three.columns
+	- 2.times do
+		= render "layouts/banner2"
