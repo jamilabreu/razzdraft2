@@ -27,10 +27,11 @@
 							= f.select (field + "_max").to_sym, 3..9
 						- elsif ["SP","RP","UTIL"].include?(label)
 							= f.select (field + "_max").to_sym, 0..4, {selected: 2}
-						- elsif ["BENCH"].include?(label)
-							= f.select (field + "_max").to_sym, 0..9
 						- else
 							= f.select (field + "_max").to_sym, 1..2
+				div.group
+					= f.label :bench_max, "BENCH"
+					= f.select :bench_max, 0..9
 				div
 					= f.label :league_type, "LEAGUE"
 					= f.select :league_type, [["Yahoo", "yahoo"], ["ESPN", "espn"]]
@@ -52,17 +53,17 @@
 				| Login Existing User
 
 
-.ad.show-for-small
-	/ = render "layouts/banner2"
-	/ a href="#" class="th" style="margin: 0 auto 20px; width: 300px;"
-	/ 	img src="http://placehold.it/300x250"
-.ad.hide-for-small
-	= render "layouts/banner"
+/ .ad.show-for-small
+/ 	/ = render "layouts/banner2"
+/ 	/ a href="#" class="th" style="margin: 0 auto 20px; width: 300px;"
+/ 	/ 	img src="http://placehold.it/300x250"
+/ .ad.hide-for-small
+/ 	= render "layouts/banner"
 
 .twelve
 	.nine.columns style="padding-right: 0"
 		#available_players
 			= render partial: "baseball/table", locals: { collection: @available, removed: false }
-.three.columns
-	- 2.times do
-		= render "layouts/banner2"
+/ .three.columns
+/ 	- 2.times do
+/ 		= render "layouts/banner2"

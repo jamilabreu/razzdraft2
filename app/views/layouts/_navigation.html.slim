@@ -1,39 +1,38 @@
 .row
 	.twelve.columns
-		.fixed id="navigation"
-			nav.top-bar
-				ul
-					li.name
-						h1
-							= image_tag "http://razzball.com/wp-content/themes/razzball2012/images/baseball-logo.png", width: 72, style: "margin: 2px 15px 0 5px"
-						/ = link_to "RazzDraft", root_path
-					- if current_page?(root_path)
-						li.search
-							form.collapse
-								input id="player_search" placeholder="Player Search" type="search" data-league-type="#{@league_type}"
-						li
-							= select_tag :position_search, options_for_select(["POS","C","1B","2B","SS","3B","MI","CI","OF","UTIL","P","SP","RP"], selected: params[:position]), {"data-league-type" => @league_type}
-						/ li style="margin-left: 10px"
-						/ 	= select_tag :position_eligibility, options_for_select([["League Type: Yahoo", "yahoo"], ["League Type: ESPN", "espn"]], selected: @league_type)
-						li.toggle-topbar= link_to "", "#"
-				section
-					ul.right
-						- if user_signed_in?
-							- if BaseballTeam.where(user_id: current_user.id).first.present?
-								li class="#{ current_page?(root_path) ? 'active' : nil }"
-									= link_to root_path do
-										i class="social foundicon-torso" style="margin-right: 10px; line-height: 10px; position: relative; top: 1px;"
-										| Free Agents
-								li class="#{ current_page?(removed_players_path) ? 'active' : nil }"
-									= link_to removed_players_path do
-										i class="general foundicon-remove" style="margin-right: 5px; line-height: 10px; position: relative; top: 2px;"
-										| Taken Players
-							li.has-dropdown
-								= link_to "#" do
-									i class="general foundicon-settings"
-								ul.dropdown
-									- if BaseballTeam.where(user_id: current_user.id).first.present?
-										li
-											= link_to "Delete Team", baseball_team_path(current_user.baseball_team.id), method: :delete
-									li= link_to "Logout", destroy_user_session_path, method: :delete
+		nav.top-bar
+			ul
+				/ li.name
+				/ 	h1
+				/ 		= image_tag "http://razzball.com/wp-content/themes/razzball2012/images/baseball-logo.png", width: 72, style: "margin: 2px 15px 0 5px"
+					/ = link_to "RazzDraft", root_path
+				- if current_page?(root_path)
+					li.search
+						form.collapse
+							input id="player_search" placeholder="Player Search" type="search" data-league-type="#{@league_type}"
+					li
+						= select_tag :position_search, options_for_select(["POS","C","1B","2B","SS","3B","MI","CI","OF","UTIL","P","SP","RP"], selected: params[:position]), {"data-league-type" => @league_type}
+					/ li style="margin-left: 10px"
+					/ 	= select_tag :position_eligibility, options_for_select([["League Type: Yahoo", "yahoo"], ["League Type: ESPN", "espn"]], selected: @league_type)
+					li.toggle-topbar= link_to "", "#"
+			section
+				ul.right
+					- if user_signed_in?
+						- if BaseballTeam.where(user_id: current_user.id).first.present?
+							li class="#{ current_page?(root_path) ? 'active' : nil }"
+								= link_to root_path do
+									i class="social foundicon-torso" style="margin-right: 10px; line-height: 10px; position: relative; top: 1px;"
+									| Free Agents
+							li class="#{ current_page?(removed_players_path) ? 'active' : nil }"
+								= link_to removed_players_path do
+									i class="general foundicon-remove" style="margin-right: 5px; line-height: 10px; position: relative; top: 2px;"
+									| Taken Players
+						li.has-dropdown
+							= link_to "#" do
+								i class="general foundicon-settings"
+							ul.dropdown
+								- if BaseballTeam.where(user_id: current_user.id).first.present?
+									li
+										= link_to "Delete Team", baseball_team_path(current_user.baseball_team.id), method: :delete
+								li= link_to "Logout", destroy_user_session_path, method: :delete
 			= render "layouts/flash" if alert || notice
