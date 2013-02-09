@@ -206,3 +206,5 @@
 					td= current_user.baseball_team.percent_goal(:era)
 					td= current_user.baseball_team.percent_goal(:whip)
 					td= current_user.baseball_team.percent_goal(:saves)
+		- if current_user.baseball_team.send(:"BENCH").present? && current_user.baseball_team.bench_max > 0
+		 | You have #{current_user.baseball_team.bench_max - current_user.baseball_team.send(:"BENCH").length} bench spots left.

@@ -2,6 +2,7 @@ require 'csv'
 
 puts "CREATE ADMIN"
 AdminUser.create name: "Jamil Abreu", email: 'abreu.jamil@gmail.com', password: 'password', password_confirmation: 'password'
+AdminUser.create name: "Grey Albright", email: 'grey@razzball.com', password: 'password', password_confirmation: 'password'
 
 puts "CREATE PROJECTIONS"
 CSV.foreach("#{Rails.root}/lib/data/baseball_projections_2013.csv", encoding: "ISO8859-1:utf-8", headers: true) do |row|
